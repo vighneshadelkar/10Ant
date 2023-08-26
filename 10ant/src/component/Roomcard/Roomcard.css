@@ -1,0 +1,50 @@
+.allroomDetails{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 0%;
+}
+
+.roomcard{
+    border-radius: 20px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgb(170, 170, 170);
+    height: fit-content;
+}
+
+.roomcardWrapper{
+    display: grid;
+}
+
+.roomDetails{
+    width: 17rem;
+    padding: 10px;
+}
+
+.roomImage{
+    object-fit: cover;
+    width: 100%;
+    border-radius: 10px;
+    height: 100%;
+}
+
+.chatbtn{
+    border-radius: 10px;
+    margin: 5px;
+    background-color: rgb(0, 110, 255);
+    border: 0;
+    color: white;
+    font-size: larger;
+    padding: 10px;
+}
+
+.chatbtn:hover{
+    border-radius: 10px;
+    margin: 5px;
+    background-color: rgb(37, 132, 255);
+    border: 0;
+    color: white;
+    font-size: larger;
+    padding: 10px;
+}
