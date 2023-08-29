@@ -11,6 +11,7 @@ import Coliving from "../Images/coliving.jpg"
 import Pg from "../Images/pg.jpg"
 import Room from "../Images/room.jpg"
 import Flatmate from "../Images/flatmate.jpg"
+import People from "../Images/people.jpg"
 import Roommate from "../Images/roommate.jpg"
 import "./Home.css";
 
@@ -19,7 +20,7 @@ export default function Home() {
     <div className="homeContainer">
       <div className="homeWrapper">
         <div className="imgdiv">
-          <img src={Homeimg} alt="homeimg" class="homeimg"></img>
+          <img src={People} alt="homeimg" class="homeimg"></img>
           <h2 id="imgheader">Find Rooms Near You</h2>
           <input
             type="text"
