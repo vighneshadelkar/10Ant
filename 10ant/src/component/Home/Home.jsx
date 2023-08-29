@@ -1,5 +1,5 @@
 import React from "react";
-import Homeimg from "../Images/homeimg.jpg";
+// import Homeimg from "../Images/homeimg.jpg";
 import Homeroom from "../Homeroomcard/Homeroom";
 import Mumbai from "../Images/mumbai.jpg";
 import Banglore from "../Images/banglore.jpg";
