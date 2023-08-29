@@ -6,6 +6,7 @@
 
 /* home image css */
 .imgdiv{
+    margin-top: 0px;
     width: 100%;
     height: 500px;
     position: relative;
@@ -18,7 +19,7 @@
 
 #imgheader{
     position: absolute;
-    top: 15%;
+    top: 18%;
     left: 32%;
     color: rgb(255, 255, 255);
     font-size: 50px;
@@ -38,9 +39,9 @@
     width: 30%;
     padding: 10px;
     border-radius: 20px;
-
+    border: 0px;
     height: 25px;
-    box-shadow: inset 0px 0px 10px rgb(95, 94, 94);
+    box-shadow: inset 0px 0px 10px rgb(148, 148, 148);
 }
 /* home image css ends here */
 

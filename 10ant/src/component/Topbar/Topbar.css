@@ -5,21 +5,25 @@
     align-items: center;
     top:0;
     position: sticky;
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255,0.7);
     padding: 10px;
     margin: 0%;
     box-shadow: 0px 0px 10px rgb(44, 44, 44);
+
 }
 
 nav{
     margin: 0;
     top: 0; 
+    z-index: 2;
+    position: fixed; 
+    width: 100vw;
 }
 
 .navCenter{
     display: flex;
     column-gap: 5px;
-    background-color: rgb(255, 255, 255);
+    /* background-color: rgba(255, 255, 255,0.5); */
     border-radius: 25px;
     justify-content: center;
     align-items: center;
@@ -31,7 +35,7 @@ nav{
 }
 
 .searchInput{
-    border: 2px solid rgb(59, 59, 59);
+    border: 2px solid rgb(112, 112, 112);
     border-radius: 25px;
     padding: 7px;
     width: 455px;
@@ -43,8 +47,25 @@ nav{
     align-items: center;
 }
 
+
 .navLinks{
     display: flex;
     gap:.8rem;
 }
+
+.navLeft {
+    width: 300px; 
+  height: 60px;
+  overflow: hidden; 
+  padding: 0;
+  }
+  
+  
+.logo {
+    padding: 0;
+    max-width: 100%; 
+  max-height: 100%;
+  width: auto; 
+  /* height: 60px; */
+  }
 

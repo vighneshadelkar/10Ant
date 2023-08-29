@@ -1,12 +1,14 @@
 import React from "react";
-import "./Topbar.css"
+import "./Topbar.css";
+import logo from "../Images/logo.png"
 
 export default function Topbar() {
   return (
     <nav>
       <div className="navContainer">
         <div className="navLeft">
-          <span>10Ant</span>
+          <img src={logo} alt="logo" className="logo"/>
+          {/* <h2>10ANT</h2> */}
         </div>
         <div className="navCenter">
           <div>
