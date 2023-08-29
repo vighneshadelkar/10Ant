@@ -3,12 +3,14 @@
     height: calc(100vh - 60px);
     justify-content: center;
     margin-top: 20px;
+    z-index: 2;
 }
 
 .roomWrapper{
     padding: 20px;
     column-gap: 20px;
     display: flex;
+    
 }
 
 .roomCards{

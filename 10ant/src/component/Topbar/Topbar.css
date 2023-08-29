@@ -17,7 +17,8 @@ nav{
     top: 0; 
     z-index: 2;
     position: fixed; 
-    width: 100vw;
+    width: 100%;
+    max-height: 45px;
 }
 
 .navCenter{

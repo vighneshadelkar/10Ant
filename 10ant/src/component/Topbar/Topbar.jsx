@@ -17,9 +17,9 @@ export default function Topbar() {
         </div>
         <div className="navRight">
           <div className="navLinks">
-            <span>Home</span>
-            <span>Room</span>
-            <span>Roommates</span>
+            <h4>HOME</h4>
+            <h4>ROOMMATE</h4>
+            <h4>ROOM</h4>
           </div>
         </div>
       </div>
