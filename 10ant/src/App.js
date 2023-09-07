@@ -8,7 +8,8 @@ import Signup from "./pages/Login/Signup";
 import Profile from "./pages/Profile/Profile";
 import Addroom from "./pages/Addroom/Addroom";
 import { useState, useEffect } from "react";
-import ClipLoader from "react-spinners/ClipLoader";
+import Loadingpg from "./pages/Loading/Loadingpg";
+
 
 
 function App() {
@@ -19,17 +20,12 @@ function App() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 4000);
+    }, 3500);
   }, []);
 
-  
+
   return (
-    Loading ? <ClipLoader
-      color={"#3179C7"}
-      size={150}
-      aria-label="Loading Spinner"
-      data-testid="loader"
-    /> : <div className="App">
+    Loading ? <Loadingpg /> : <div className="App">
       <header>
         <Topbar />
       </header>
