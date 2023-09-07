@@ -14,8 +14,6 @@ import People from "../../component/Images/people.jpg";
 import Roommate from "../../component/Images/roommate.jpg";
 import "./Home.css";
 
-import Zoom from 'react-reveal/Zoom';
-
 export default function Home() {
   return (
     <div className="homeContainer">
