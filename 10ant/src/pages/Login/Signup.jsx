@@ -22,7 +22,7 @@ export default function Signup() {
             <input type="password" name="password" />
             <br></br>
             <button className="submit-btn" type="submit">
-              Login
+              Signup
             </button>
           </form>
           <p>
