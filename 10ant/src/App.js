@@ -5,6 +5,7 @@ import Footer from "./component/Footer/Footer";
 import Login from "./pages/Login/Login";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Signup from "./pages/Login/Signup";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/rooms" element={<Room />}></Route>
           <Route exact path="/login" element={<Login />}></Route>
           <Route exact path="/signup" element={<Signup />}></Route>
+          <Route exact path="/profile" element={<Profile />}></Route>
         </Routes>
       </BrowserRouter>
       <footer>

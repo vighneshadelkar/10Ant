@@ -7,16 +7,22 @@ export default function Sidebar() {
       <div className="sidebarWrapper">
         <ul className="sidebarList">
           <li className="sidebarListitem">
-            <span className="siderbarListitemText">Dashboard</span>
+            <span className="siderbarListitemText">HOME</span>
           </li>
           <li className="sidebarListitem">
-            <span className="siderbarListitemText">Rooms</span>
+            <span className="siderbarListitemText">ROOMS</span>
           </li>
           <li className="sidebarListitem">
-            <span className="siderbarListitemText">Roomates</span>
+            <span className="siderbarListitemText">ROOMATES</span>
           </li>
           <li className="sidebarListitem">
-            <span className="siderbarListitemText">Chats</span>
+            <span className="siderbarListitemText">ADDROOMS</span>
+          </li>
+          <li className="sidebarListitem">
+            <span className="siderbarListitemText">LISTEDROOMS</span>
+          </li>
+          <li className="sidebarListitem">
+            <span className="siderbarListitemText">CHATS</span>
           </li>
         </ul>
       </div>
