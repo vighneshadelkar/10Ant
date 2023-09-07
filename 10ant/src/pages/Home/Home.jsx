@@ -5,14 +5,16 @@ import Banglore from "../../component/Images/banglore.jpg";
 import Delhi from "../../component/Images/delhi.jpg";
 import Chennai from "../../component/Images/chennai.jpg";
 import House from "../../component/Images/houseimg.png";
-import Entirehome from "../../component/Images/entirehouse.jpg"
-import Coliving from "../../component/Images/coliving.jpg"
-import Pg from "../../component/Images/pg.jpg"
-import Room from "../../component/Images/room.jpg"
-import Flatmate from "../../component/Images/flatmate.jpg"
-import People from "../../component/Images/people.jpg"
-import Roommate from "../../component/Images/roommate.jpg"
+import Entirehome from "../../component/Images/entirehouse.jpg";
+import Coliving from "../../component/Images/coliving.jpg";
+import Pg from "../../component/Images/pg.jpg";
+import Room from "../../component/Images/room.jpg";
+import Flatmate from "../../component/Images/flatmate.jpg";
+import People from "../../component/Images/people.jpg";
+import Roommate from "../../component/Images/roommate.jpg";
 import "./Home.css";
+
+import Zoom from 'react-reveal/Zoom';
 
 export default function Home() {
   return (
