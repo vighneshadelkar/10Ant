@@ -1,5 +1,4 @@
 import React from "react";
-// import Homeimg from "../Images/homeimg.jpg";
 import Homeroom from "../../component/Homeroomcard/Homeroom";
 import Mumbai from "../../component/Images/mumbai.jpg";
 import Banglore from "../../component/Images/banglore.jpg";
