@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Homeroom from "../../component/Homeroomcard/Homeroom";
 import Mumbai from "../../component/Images/mumbai.jpg";
 import Banglore from "../../component/Images/banglore.jpg";
@@ -13,8 +13,16 @@ import Flatmate from "../../component/Images/flatmate.jpg";
 import People from "../../component/Images/people.jpg";
 import Roommate from "../../component/Images/roommate.jpg";
 import "./Home.css";
+import Aos from "aos";
+import "aos/dist/aos.css"
 
 export default function Home() {
+
+  useEffect(() => {
+    Aos.init();
+  }, [])
+  
+
   return (
     <div className="homeContainer">
       <div className="homeWrapper">
@@ -42,7 +50,7 @@ export default function Home() {
           </section>
 
           {/* find my room */}
-          <section>
+          <section data-aos="zoom-in">
             <div className="listRooms">
               <div className="roomsWrapper">
                 <div className="content">
@@ -66,7 +74,7 @@ export default function Home() {
 
           <hr></hr>
 
-          <section>
+          <section data-aos="zoom-in">
             <div className="gridContainer">
               <div className="gridItem1">
                 <h2>
