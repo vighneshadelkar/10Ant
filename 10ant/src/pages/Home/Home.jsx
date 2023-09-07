@@ -1,18 +1,18 @@
 import React from "react";
 // import Homeimg from "../Images/homeimg.jpg";
-import Homeroom from "../Homeroomcard/Homeroom";
-import Mumbai from "../Images/mumbai.jpg";
-import Banglore from "../Images/banglore.jpg";
-import Delhi from "../Images/delhi.jpg";
-import Chennai from "../Images/chennai.jpg";
-import House from "../Images/houseimg.png";
-import Entirehome from "../Images/entirehouse.jpg"
-import Coliving from "../Images/coliving.jpg"
-import Pg from "../Images/pg.jpg"
-import Room from "../Images/room.jpg"
-import Flatmate from "../Images/flatmate.jpg"
-import People from "../Images/people.jpg"
-import Roommate from "../Images/roommate.jpg"
+import Homeroom from "../../component/Homeroomcard/Homeroom";
+import Mumbai from "../../component/Images/mumbai.jpg";
+import Banglore from "../../component/Images/banglore.jpg";
+import Delhi from "../../component/Images/delhi.jpg";
+import Chennai from "../../component/Images/chennai.jpg";
+import House from "../../component/Images/houseimg.png";
+import Entirehome from "../../component/Images/entirehouse.jpg"
+import Coliving from "../../component/Images/coliving.jpg"
+import Pg from "../../component/Images/pg.jpg"
+import Room from "../../component/Images/room.jpg"
+import Flatmate from "../../component/Images/flatmate.jpg"
+import People from "../../component/Images/people.jpg"
+import Roommate from "../../component/Images/roommate.jpg"
 import "./Home.css";
 
 export default function Home() {
