@@ -1,0 +1,69 @@
+.addroom{
+    margin-top: 100px;
+    background-color: white;
+    width: 100%;
+    height: fit-content;
+    border-radius: 20px;
+    justify-content: center;
+    padding: 10px;
+    align-items: center;
+}
+
+.addroomWrapper{
+    padding: 20px;
+    width: 40%;
+    /* justify-content: center; */
+    flex-direction: column;
+    margin-left: 30%;
+    /* border: 1px solid black; */
+    border-radius: 20px;
+    box-shadow: 1px 1px 8px black;
+}
+
+input{
+    width: 100%;
+    border-radius: 10px;
+    padding: 5px;
+    
+
+}
+
+.name{
+    display: flex;
+    /* padding: 5px; */
+}
+
+select{
+    width: 50%;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.create{
+    margin-top: 10px;
+    width: 100%;
+    border: 0;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: rgb(41, 176, 41);
+    color: white;
+    font-size: larger;
+    align-items: center;
+}
+
+.create:hover{
+    margin-top: 10px;
+    width: 100%;
+    border: 0;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: rgb(123, 207, 123);
+    color: white;
+    font-size: larger;
+    align-items: center;
+}
+
+
+form div{
+    margin-bottom: 8px;
+}

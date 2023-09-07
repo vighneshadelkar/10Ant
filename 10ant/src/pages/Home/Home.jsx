@@ -20,11 +20,11 @@ export default function Home() {
     <div className="homeContainer">
       <div className="homeWrapper">
         <div className="imgdiv">
-          <img src={People} alt="homeimg" class="homeimg"></img>
+          <img src={People} alt="homeimg" className="homeimg"></img>
           <h2 id="imgheader">Find Rooms Near You</h2>
           <input
             type="text"
-            class="search"
+            className="search"
             placeholder="Search by locality"
           ></input>
         </div>

@@ -1,16 +1,12 @@
-import React, { useState, useContext } from "react";
-// import Navbar from "../../components//Navbar";
+import React from "react";
 import Sidebar from "../../component/Sidebar/Sidebar";
-// import Feed from "../../components/Feed/Feed";
 import coverImg from "../../component/Images/coverimg.jpg";
 import profilePic from "../../component/Images/profilepic.jpg";
 import Roomdata from "../../component/Data/Data";
 import Roomcard from "../../component/Roomcard/Roomcard";
-// import Pfrightbar from "../../components/Pfrightbar/Pfrightbar";
 import "./Profile.css";
 
 export default function Profile() {
-
   return (
     <>
       <div className="profile">
@@ -29,10 +25,10 @@ export default function Profile() {
             <hr></hr>
             <br></br>
             <div className="roomCards">
-          {Roomdata.map((r) => {
-            return <Roomcard key={r.id} {...r} />;
-          })}
-        </div>
+              {Roomdata.map((r) => {
+                return <Roomcard key={r.id} {...r} />;
+              })}
+            </div>
           </div>
         </div>
       </div>
