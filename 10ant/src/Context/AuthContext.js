@@ -1,18 +1,20 @@
 import { createContext, useState } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
 
-    let [token, setToken] = useState(null)
-    let [user, setUser] = useState(null)
+    let [token, setToken] = useState(()=>localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : null);
+    let [user, setUser] = useState(()=>localStorage.getItem('user') ? jwt_decode(localStorage.getItem('token')) : null);
+    const navigate = useNavigate();
 
     let loginUser = async (e) => {
         e.preventDefault();
-        let response = await axios.post('http://localhost:8000/api/token', {
-            'username': e.target.username.value,
+        let response = await axios.post('http://localhost:8000/api/token/', {
+            'email': e.target.email.value,
             'password': e.target.password.value
         }, {
             headers: {
@@ -23,7 +25,10 @@ export const AuthProvider = ({ children }) => {
             if(response.status === 200){
                 setToken(response.data);
                 setUser(jwt_decode(response.data.access));
-                console.log(jwt_decode(response.data.access));
+
+                localStorage.setItem('token', JSON.stringify(response.data));
+                localStorage.setItem('user', JSON.stringify(jwt_decode(response.data.access)));
+                navigate('/');
             }
             else {
                 alert('Invalid Credentials')
@@ -34,9 +39,20 @@ export const AuthProvider = ({ children }) => {
         });
     }                
 
+    let logoutUser = () => {
+        console.log('logout');
+        setToken(null);
+        setUser(null);
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        navigate('/login');
+    }
+    
+
     let contextData = {
         user:user,
-        loginUser:loginUser
+        loginUser:loginUser,
+        logoutUser:logoutUser
     }
 
     return (
