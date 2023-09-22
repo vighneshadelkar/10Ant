@@ -56,13 +56,13 @@ export default function Room() {
   return (
     <div className="room">
       <div className="searchBar">
-        <input 
+        {/* <input 
           type="text"
           placeholder="Search"
           className="searchInput"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-        />
+        /> */}
         <div>
         <select className="minimal"
           value={locationFilter}
