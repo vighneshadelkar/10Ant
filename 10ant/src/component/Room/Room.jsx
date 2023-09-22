@@ -6,7 +6,7 @@ import Roomcard from "../Roomcard/Roomcard";
 export default function Room() {
   const [searchQuery, setSearchQuery] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
-  const [priceRange, setPriceRange] = useState({ min: "", max: "" });
+  const [priceRange, setPriceRange] = useState({ min: "0", max: "2000" });
   const [professionFilter, setProfessionFilter] = useState("");
   const [bhkFilter, setBhkFilter] = useState("");
   const [filteredData, setFilteredData] = useState(Roomdata);

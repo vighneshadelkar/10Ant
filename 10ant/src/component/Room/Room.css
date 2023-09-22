@@ -69,6 +69,8 @@ select,input {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
   }
   
   
@@ -111,7 +113,8 @@ select.minimal {
   .minimal{
     margin:10px 6px;
     width: 14%;
-    padding:8px 12px;
+    padding:8px 10px;
+    padding-right:0 ;
   }
   select:-moz-focusring {
     color: transparent;
