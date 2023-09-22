@@ -11,24 +11,29 @@ export default function Roomcard(props) {
             <div >
               <img src={Room} alt="img" className="roomImage"></img>
             </div>
-            <h4 className="roomPrice">{props.price} per person</h4>
+              {/* <label htmlFor="Location">Price: </label> */}
+            <h4 className="roomPrice">Price:{props.price}</h4>
             <div className="roomLocation">
               <label htmlFor="Location">Location: </label>
               <span className="Location">{props.location}</span>
             </div>
-            <div className="roomatesNeeded">
-              <label htmlFor="roomates">Roomates Needed: </label>
-              <span className="roomates">{props.roomates}</span>
+            <div className="roomOwner">
+              <span> {props.name}</span>
             </div>
-            <span className="roomConfiguration">{props.bhk}</span>
+            <div className="roomatesNeeded">
+              <label htmlFor="roomates"></label>
+              <span className="roomates">Roomates Needed : {props.roommates}</span>
+            </div>
+            <span className="roomConfiguration">BHK: {props.bhk}</span>
             <hr></hr>
             <span className="roomDescription" min={100}>
-              {props.description}
+             Job:  {props.description}
+            </span>
+            <span className="roomProfession" min={100}>
+             {props.profession}
             </span>
             <hr></hr>
-            <div className="roomOwner">
-              <span>{props.name}</span>
-            </div>
+            
             <button className="chatbtn">Chat with owner</button>
           </div>
         </div>
