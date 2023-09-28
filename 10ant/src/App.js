@@ -9,6 +9,8 @@ import Profile from "./pages/Profile/Profile";
 import Addroom from "./pages/Addroom/Addroom";
 import { useState, useEffect } from "react";
 import Loadingpg from "./pages/Loading/Loadingpg";
+import PrivateRoute from "./utils/PrivateRoute";
+import { AuthProvider } from "./Context/AuthContext";
 
 
 
@@ -26,18 +28,26 @@ function App() {
 
   return (
     Loading ? <Loadingpg /> : <div className="App">
-      <header>
-        <Topbar />
-      </header>
       <BrowserRouter>
-        <Routes>
-          <Route exact path="/" element={<Home />}></Route>
-          <Route exact path="/rooms" element={<Room />}></Route>
-          <Route exact path="/login" element={<Login />}></Route>
-          <Route exact path="/signup" element={<Signup />}></Route>
-          <Route exact path="/profile" element={<Profile />}></Route>
-          <Route exact path="/addroom" element={<Addroom />}></Route>
-        </Routes>
+        <AuthProvider>
+          <header>
+            <Topbar />
+          </header>
+          <Routes>
+            <Route exact path="/" element={<Home />}></Route>
+            <Route exact path='/rooms' element={<PrivateRoute/>}>
+              <Route exact path="/rooms" element={<Room />}></Route>
+            </Route>
+            <Route exact path="/login" element={<Login />}></Route>
+            <Route exact path="/signup" element={<Signup />}></Route>
+            <Route exact path='/profile' element={<PrivateRoute/>}>
+              <Route exact path="/profile" element={<Profile />}></Route>
+            </Route>
+            <Route exact path='/addroom' element={<PrivateRoute/>}>
+              <Route exact path="/addroom" element={<Addroom />}></Route>
+            </Route>
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
       <footer>
         <Footer />
