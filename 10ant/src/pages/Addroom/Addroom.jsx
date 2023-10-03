@@ -3,13 +3,12 @@ import "./Addroom.css";
 
 export default function Addroom() {
   const [roomData, setroomData] = useState({
-    owner_name: "",
+    name: "",
+    location: "",
     price: 0,
     bhk: "",
     description: "",
-    tenants: 1,
-    sqft:"",
-    address:"",
+    roommate: 1,
   });
 
   function handleInput(event) {
@@ -21,18 +20,16 @@ export default function Addroom() {
         [name]: value,
       };
     });
-    console.log(roomData);
+    //console.log(roomData);
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log(roomData);
     const res = await fetch("http://localhost:8000/api/room/", {
       method: "POST",
       body: JSON.stringify(roomData),
-      headers: {
-        "Content-Type": "application/json",
-      },
     });
 
     if (!res) {
@@ -43,13 +40,12 @@ export default function Addroom() {
       const result = await res.json();
       console.log(result);
       setroomData({
-        owner_name: "",
+        name: "",
+        location: "",
         price: null,
         bhk: "",
         description: "",
-        tenants: null,
-        sqft:"",
-        address:"",
+        roommate: null,
       });
     }
   };
@@ -65,8 +61,8 @@ export default function Addroom() {
             <input
               type="text"
               className="name"
-              name="owner_name"
-              value={roomData.owner_name}
+              name="name"
+              value={roomData.name}
               onChange={handleInput}
               placeholder="egs: Vighnesh Adelkar"
               required
@@ -94,7 +90,7 @@ export default function Addroom() {
               required
             />
           </div>
-          {/* <div className="location">
+          <div className="location">
             <label htmlFor="location">Location:</label>
             <input
               type="text"
@@ -102,18 +98,6 @@ export default function Addroom() {
               value={roomData.location}
               onChange={handleInput}
               placeholder="egs:Mahim,Mumbai"
-            />
-            
-          </div> */}
-          <div className="roomates">
-            <label htmlFor="roomates">Address:</label>
-            <input
-              type="text"
-              name="address"
-              value={roomData.address}
-              onChange={handleInput}
-              placeholder=""
-              required
             />
           </div>
           <div className="description">
@@ -131,19 +115,8 @@ export default function Addroom() {
             <label htmlFor="roomates">No of roomates you need:</label>
             <input
               type="text"
-              name="tenants"
-              value={roomData.tenants}
-              onChange={handleInput}
-              placeholder=""
-              required
-            />
-          </div>
-          <div className="roomates">
-            <label htmlFor="roomates">SQFT:</label>
-            <input
-              type="text"
-              name="sqft"
-              value={roomData.sqft}
+              name="roommate"
+              value={roomData.roommate}
               onChange={handleInput}
               placeholder=""
               required
