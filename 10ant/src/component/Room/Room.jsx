@@ -1,16 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Room.css";
 import Roomdata from "../Data/Data";
 import Roomcard from "../Roomcard/Roomcard";
+import axios from 'axios';
 
 export default function Room() {
+  const [rooms, setRooms] = useState([]);
+
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/room/");
+        if (response && response.data) {
+          setRooms(response.data);
+        }
+      } catch (error) {
+        console.error('Error fetching rooms:', error);
+      } 
+    }
+
+    fetchRooms();
+  }, []);
+
   return (
     <div className="room">
       <div className="roomWrapper">
         {/* <Sidebar/> */}
         <div className="roomCards">
-          {Roomdata.map((r) => {
-            return <Roomcard key={r.id} {...r} />;
+          {rooms?.map((r,index) => {
+            return <Roomcard key={index} {...r} />;
           })}
         </div>
         <hr className="divider"></hr>
