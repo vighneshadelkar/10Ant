@@ -28,7 +28,7 @@ export default function Room() {
         {/* <Sidebar/> */}
         <div className="roomCards">
           {rooms?.map((r,index) => {
-            return <Roomcard key={index} {...r} />;
+            return <Roomcard key={r.id} {...r} />;
           })}
         </div>
         <hr className="divider"></hr>
