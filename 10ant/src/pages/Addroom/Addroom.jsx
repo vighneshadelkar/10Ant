@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import "./Addroom.css";
+import axios from "axios";
 
 export default function Addroom() {
   const [roomData, setroomData] = useState({
     owner_name: "",
     price: 0,
-    bhk: "",
+    bhk: null,
     description: "",
     tenants: 1,
-    sqft:"",
+    sqft:null,
     address:"",
   });
 
@@ -27,9 +28,14 @@ export default function Addroom() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:8000/api/room/", {
-      method: "POST",
-      body: JSON.stringify(roomData),
+    const formData = new FormData();
+    for (const key in roomData) {
+      formData.append(key, roomData[key]);
+    }
+
+
+    const res = await axios.post("http://localhost:8000/api/room/", {
+      body: formData,
       headers: {
         "Content-Type": "application/json",
       },
