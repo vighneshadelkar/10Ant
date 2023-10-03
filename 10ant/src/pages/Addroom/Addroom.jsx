@@ -7,6 +7,7 @@ export default function Addroom() {
   let {user} = useContext(AuthContext);
 
   const [roomData, setroomData] = useState({
+    title: "",
     price: 0,
     bhk: null,
     description: "",
@@ -34,13 +35,13 @@ export default function Addroom() {
     console.log(user.user_id);
     const res = await axios.postForm("http://localhost:8000/api/room/", {
       owner_pkey: user.user_id,
-      title: "title",
-      address: "address",
-      price: 10000,
-      bhk: 50,
+      title: roomData.title,
+      address: roomData.address,
+      price: parseInt(roomData.price),
+      bhk: 2,
       description: roomData.description,
-      tenants: 2,
-      sqft:1000,
+      tenants: parseInt(roomData.tenants),
+      sqft: parseInt(roomData.sqft),
     });
 
     if (!res) {
@@ -51,6 +52,7 @@ export default function Addroom() {
       const result = await res.json;
       console.log(result);
       setroomData({
+        title: "",
         price: null,
         bhk: "",
         description: "",
@@ -66,6 +68,18 @@ export default function Addroom() {
       <div className="addroomWrapper">
         <h2>Add your room: </h2>
         <form onSubmit={handleSubmit}>
+          <div className="title">
+            <label htmlFor="title">Title:</label>
+            <input
+              type="text"
+              name="title"
+              value={roomData.title}
+              onChange={handleInput}
+              placeholder="eg:1BHK in Mahim"
+              required
+            />
+          </div>
+          <hr></hr>
           <div className="roomtype">
             <label htmlFor="roomtype">Room type:</label>
             <select name="bhk" onChange={handleInput}>
