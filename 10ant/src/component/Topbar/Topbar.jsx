@@ -26,7 +26,7 @@ export default function Topbar() {
             <h4>ROOMMATE</h4>
             <NavLink to='/rooms'><h4>ROOM</h4></NavLink>
             {user ? <NavLink onClick={logoutUser}><h4>LOGOUT</h4></NavLink> : <NavLink to='/login'><h4>LOGIN</h4></NavLink>}
-                  
+            {user && ( <NavLink to='/addroom'><h4>Addroom</h4></NavLink>)}    
           </div>
         </div>
       </div>
