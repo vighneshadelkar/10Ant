@@ -3,12 +3,13 @@ import "./Addroom.css";
 
 export default function Addroom() {
   const [roomData, setroomData] = useState({
-    name: "",
-    location: "",
+    owner_name: "",
     price: 0,
     bhk: "",
     description: "",
-    roommate: 1,
+    tenants: 1,
+    sqft:"",
+    address:"",
   });
 
   function handleInput(event) {
@@ -42,12 +43,13 @@ export default function Addroom() {
       const result = await res.json();
       console.log(result);
       setroomData({
-        name: "",
-        location: "",
+        owner_name: "",
         price: null,
         bhk: "",
         description: "",
-        roommate: null,
+        tenants: null,
+        sqft:"",
+        address:"",
       });
     }
   };
@@ -63,8 +65,8 @@ export default function Addroom() {
             <input
               type="text"
               className="name"
-              name="name"
-              value={roomData.name}
+              name="owner_name"
+              value={roomData.owner_name}
               onChange={handleInput}
               placeholder="egs: Vighnesh Adelkar"
               required
@@ -92,7 +94,7 @@ export default function Addroom() {
               required
             />
           </div>
-          <div className="location">
+          {/* <div className="location">
             <label htmlFor="location">Location:</label>
             <input
               type="text"
@@ -100,6 +102,18 @@ export default function Addroom() {
               value={roomData.location}
               onChange={handleInput}
               placeholder="egs:Mahim,Mumbai"
+            />
+            
+          </div> */}
+          <div className="roomates">
+            <label htmlFor="roomates">Address:</label>
+            <input
+              type="text"
+              name="address"
+              value={roomData.address}
+              onChange={handleInput}
+              placeholder=""
+              required
             />
           </div>
           <div className="description">
@@ -117,8 +131,19 @@ export default function Addroom() {
             <label htmlFor="roomates">No of roomates you need:</label>
             <input
               type="text"
-              name="roommate"
-              value={roomData.roommate}
+              name="tenants"
+              value={roomData.tenants}
+              onChange={handleInput}
+              placeholder=""
+              required
+            />
+          </div>
+          <div className="roomates">
+            <label htmlFor="roomates">SQFT:</label>
+            <input
+              type="text"
+              name="sqft"
+              value={roomData.sqft}
               onChange={handleInput}
               placeholder=""
               required
