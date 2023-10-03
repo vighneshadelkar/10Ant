@@ -26,7 +26,7 @@ export default function Addroom() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("http://localhost:5000/api/room", {
+    const res = await fetch("http://localhost:8000/api/room/", {
       method: "POST",
       body: JSON.stringify(roomData),
       headers: {
