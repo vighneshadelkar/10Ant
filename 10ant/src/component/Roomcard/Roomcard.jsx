@@ -14,11 +14,11 @@ export default function Roomcard(props) {
             <h4 className="roomPrice">{props.price} per person</h4>
             <div className="roomLocation">
               <label htmlFor="Location">Location: </label>
-              <span className="Location">{props.location}</span>
+              <span className="Location">{props.address}</span>
             </div>
             <div className="roomatesNeeded">
               <label htmlFor="roomates">Roomates Needed: </label>
-              <span className="roomates">{props.roomates}</span>
+              <span className="roomates">{props.tenants}</span>
             </div>
             <span className="roomConfiguration">{props.bhk}</span>
             <hr></hr>
@@ -27,7 +27,7 @@ export default function Roomcard(props) {
             </span>
             <hr></hr>
             <div className="roomOwner">
-              <span>{props.name}</span>
+              <span>{props.owner_name}</span>
             </div>
             <button className="chatbtn">Chat with owner</button>
           </div>
