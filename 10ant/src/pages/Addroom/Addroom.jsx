@@ -28,14 +28,8 @@ export default function Addroom() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    for (const key in roomData) {
-      formData.append(key, roomData[key]);
-    }
-
-
     const res = await axios.post("http://localhost:8000/api/room/", {
-      body: formData,
+      body: JSON.stringify(roomData),
       headers: {
         "Content-Type": "application/json",
       },
@@ -151,7 +145,7 @@ export default function Addroom() {
               name="sqft"
               value={roomData.sqft}
               onChange={handleInput}
-              placeholder=""
+              placeholder="sqft"
               required
             />
           </div>
