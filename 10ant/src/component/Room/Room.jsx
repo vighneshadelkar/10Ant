@@ -6,6 +6,12 @@ import axios from 'axios';
 
 export default function Room() {
   const [rooms, setRooms] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const handleCardClick = (item) => {
+    console.log(item)
+    setSelectedItem(item);
+  };
 
   useEffect(() => {
     const fetchRooms = async () => {
@@ -28,7 +34,7 @@ export default function Room() {
         {/* <Sidebar/> */}
         <div className="roomCards">
           {rooms?.map((r,index) => {
-            return <Roomcard key={r.id} {...r} />;
+            return <Roomcard key={r.id} {...r}/>;
           })}
         </div>
         <hr className="divider"></hr>
