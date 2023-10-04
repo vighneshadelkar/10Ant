@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Addroom.css";
 import axios from "axios";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function Addroom() {
+  let {user} = useContext(AuthContext);
+
   const [roomData, setroomData] = useState({
-    owner_name: "",
+    title: "",
     price: 0,
     bhk: null,
     description: "",
@@ -22,17 +25,23 @@ export default function Addroom() {
         [name]: value,
       };
     });
-    console.log(roomData);
+    //console.log(roomData);
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await axios.post("http://localhost:8000/api/room/", {
-      body: JSON.stringify(roomData),
-      headers: {
-        "Content-Type": "application/json",
-      },
+    console.log(roomData);
+    console.log(user.user_id);
+    const res = await axios.postForm("http://localhost:8000/api/room/", {
+      owner_pkey: user.user_id,
+      title: roomData.title,
+      address: roomData.address,
+      price: parseInt(roomData.price),
+      bhk: 2,
+      description: roomData.description,
+      tenants: parseInt(roomData.tenants),
+      sqft: parseInt(roomData.sqft),
     });
 
     if (!res) {
@@ -40,10 +49,10 @@ export default function Addroom() {
     }
 
     if (res) {
-      const result = await res.json();
+      const result = await res.json;
       console.log(result);
       setroomData({
-        owner_name: "",
+        title: "",
         price: null,
         bhk: "",
         description: "",
@@ -59,16 +68,14 @@ export default function Addroom() {
       <div className="addroomWrapper">
         <h2>Add your room: </h2>
         <form onSubmit={handleSubmit}>
-          <div className="name">
-            <label htmlFor="name">Name:</label>
-            <br></br>
+          <div className="title">
+            <label htmlFor="title">Title:</label>
             <input
               type="text"
-              className="name"
-              name="owner_name"
-              value={roomData.owner_name}
+              name="title"
+              value={roomData.title}
               onChange={handleInput}
-              placeholder="egs: Vighnesh Adelkar"
+              placeholder="eg:1BHK in Mahim"
               required
             />
           </div>
