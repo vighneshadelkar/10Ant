@@ -2,14 +2,73 @@ import React, { useEffect, useState } from "react";
 import "./Room.css";
 import Roomdata from "../Data/Data";
 import Roomcard from "../Roomcard/Roomcard";
-import axios from 'axios';
+import axios from "axios";
 
 export default function Room() {
   const [rooms, setRooms] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [locationFilter, setLocationFilter] = useState("");
+  const [priceRange, setPriceRange] = useState({ min: "0", max: "2000" });
+  const [professionFilter, setProfessionFilter] = useState("");
+  const [bhkFilter, setBhkFilter] = useState("");
+  const [filteredData, setFilteredData] = useState(Roomdata);
+
+  const locationOptions = [...new Set(Roomdata.map((room) => room.location))];
+  const bhkOptions = [...new Set(Roomdata.map((room) => room.bhk.toString()))];
+  const professionOptions = [
+    ...new Set(Roomdata.map((room) => room.profession)),
+  ];
+
+  const filterData = () => {
+    const filtered = Roomdata.filter((room) => {
+      //name
+      const nameMatch = room.name
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
+
+      //location
+      const locationMatch =
+        !locationFilter ||
+        room.location.toLowerCase() === locationFilter.toLowerCase();
+
+      //price
+      const priceMatch =
+        (!priceRange.min || room.price >= parseFloat(priceRange.min)) &&
+        (!priceRange.max || room.price <= parseFloat(priceRange.max));
+
+      // profession
+      const professionMatch =
+        !professionFilter ||
+        room.profession.toLowerCase() === professionFilter.toLowerCase();
+
+      //BHK
+      const bhkMatch = !bhkFilter || room.bhk.toString() === bhkFilter;
+
+      return (
+        nameMatch && locationMatch && priceMatch && professionMatch && bhkMatch
+      );
+    });
+
+    setFilteredData(filtered);
+  };
+
+  const clearFilters = () => {
+    setSearchQuery("");
+    setLocationFilter("");
+    setPriceRange({ min: "", max: "" });
+    setProfessionFilter("");
+    setBhkFilter("");
+    setFilteredData(Roomdata); // Reset to the original data
+  };
+
+  useEffect(() => {
+    filterData();
+    // eslint-disable-next-line
+  }, [searchQuery, locationFilter, priceRange, professionFilter, bhkFilter]);
 
   const handleCardClick = (item) => {
-    console.log(item)
+    console.log(item);
     setSelectedItem(item);
   };
 
@@ -21,20 +80,92 @@ export default function Room() {
           setRooms(response.data);
         }
       } catch (error) {
-        console.error('Error fetching rooms:', error);
-      } 
-    }
+        console.error("Error fetching rooms:", error);
+      }
+    };
 
     fetchRooms();
   }, []);
 
   return (
     <div className="room">
+      <div className="searchBar">
+        {/* <input 
+          type="text"
+          placeholder="Search"
+          className="searchInput"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        /> */}
+        <div>
+          <select
+            className="minimal"
+            value={locationFilter}
+            onChange={(e) => setLocationFilter(e.target.value)}
+          >
+            <option value="">Location</option>
+            {locationOptions.map((location, index) => (
+              <option key={index} value={location}>
+                {location}
+              </option>
+            ))}
+          </select>
+          <select
+            className="minimal"
+            value={professionFilter}
+            onChange={(e) => setProfessionFilter(e.target.value)}
+          >
+            <option value="">Profession</option>
+            {professionOptions.map((profession, index) => (
+              <option key={index} value={profession}>
+                {profession}
+              </option>
+            ))}
+          </select>
+          <select
+            className="minimal"
+            value={bhkFilter}
+            onChange={(e) => setBhkFilter(e.target.value)}
+          >
+            <option value="">BHK</option>
+            {bhkOptions.map((bhk, index) => (
+              <option key={index} value={bhk}>
+                {`${bhk} BHK`}
+              </option>
+            ))}
+          </select>
+          <span className="priceRange">
+            Price Range:
+            <input
+              className="minimal"
+              type="number"
+              placeholder="Min Price"
+              value={priceRange.min}
+              onChange={(e) =>
+                setPriceRange({ ...priceRange, min: e.target.value })
+              }
+            />
+            <input
+              className="minimal"
+              type="number"
+              placeholder="Max Price"
+              value={priceRange.max}
+              onChange={(e) =>
+                setPriceRange({ ...priceRange, max: e.target.value })
+              }
+            />
+          </span>
+        </div>
+
+        <button id="nofilter" onClick={clearFilters}>
+          Clear Filters
+        </button>
+      </div>
       <div className="roomWrapper">
         {/* <Sidebar/> */}
         <div className="roomCards">
-          {rooms?.map((r,index) => {
-            return <Roomcard key={r.id} {...r}/>;
+          {rooms?.map((r, index) => {
+            return <Roomcard key={r.id} {...r} />;
           })}
         </div>
         <hr className="divider"></hr>
