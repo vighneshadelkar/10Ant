@@ -14,6 +14,7 @@ export default function Addroom() {
     tenants: 1,
     sqft:null,
     address:"",
+    image: null,
   });
 
   function handleInput(event) {
@@ -42,6 +43,7 @@ export default function Addroom() {
       description: roomData.description,
       tenants: parseInt(roomData.tenants),
       sqft: parseInt(roomData.sqft),
+      photo: roomData.image,
     });
 
     if (!res) {
@@ -59,6 +61,7 @@ export default function Addroom() {
         tenants: null,
         sqft:"",
         address:"",
+        image: null,
       });
     }
   };
@@ -154,6 +157,15 @@ export default function Addroom() {
               onChange={handleInput}
               placeholder="sqft"
               required
+            />
+          </div>
+          <div className="image">
+            <label htmlFor="image">Upload Image:</label>
+            <input
+              type="file"
+              name="image"
+              value={roomData.image}
+              onChange={handleInput}
             />
           </div>
           <button className="create">Post Your add for free</button>
