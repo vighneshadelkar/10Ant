@@ -1,10 +1,17 @@
 import React from "react";
 import "./Roomcard.css";
-import Room from "../Images/room.jpg"
+import Room from "../Images/room.jpg";
+import { useNavigate } from "react-router-dom";
 
-export default function Roomcard(props,handleClick) {
+export default function Roomcard(props) {
+  const navigate=useNavigate()
+
+  const handleCardClick=()=>
+  {
+    navigate('/one')
+  }
   return (
-    <div className="roomcard" onClick={handleClick}>
+    <div className="roomcard" onClick={handleCardClick}>
       <div className="roomcardWrapper">
         <div className="roomDetails">
           <div className="allroomDetails">
