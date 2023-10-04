@@ -2,9 +2,9 @@ import React from "react";
 import "./Roomcard.css";
 import Room from "../Images/room.jpg"
 
-export default function Roomcard(props) {
+export default function Roomcard(props,handleClick) {
   return (
-    <div className="roomcard">
+    <div className="roomcard" onClick={handleClick}>
       <div className="roomcardWrapper">
         <div className="roomDetails">
           <div className="allroomDetails">
