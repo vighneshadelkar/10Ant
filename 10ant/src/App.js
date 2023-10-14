@@ -12,7 +12,7 @@ import Loadingpg from "./pages/Loading/Loadingpg";
 import PrivateRoute from "./utils/PrivateRoute";
 import { AuthProvider } from "./Context/AuthContext";
 import SingleRoom from "./pages/SingleRoom/SingleRoom"
-
+import EditProfile from "./pages/EditProfile/EditProfile"
 
 function App() {
 
@@ -46,6 +46,9 @@ function App() {
             </Route>
             <Route exact path='/addroom' element={<PrivateRoute/>}>
               <Route exact path="/addroom" element={<Addroom />}></Route>
+            </Route>
+            <Route exact path='/editprofile' element={<PrivateRoute/>}>
+              <Route exact path="/editprofile" element={<EditProfile />}></Route>
             </Route>
           </Routes>
         </AuthProvider>
