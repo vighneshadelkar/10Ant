@@ -13,6 +13,7 @@ import PrivateRoute from "./utils/PrivateRoute";
 import { AuthProvider } from "./Context/AuthContext";
 import SingleRoom from "./pages/SingleRoom/SingleRoom"
 import EditProfile from "./pages/EditProfile/EditProfile"
+import Chat from "./pages/Chat/Chat";
 
 function App() {
 
@@ -43,6 +44,9 @@ function App() {
             {/* <Route exact path="/oneroom" element={<OneRoom />}></Route> */}
             <Route exact path='/profile' element={<PrivateRoute/>}>
               <Route exact path="/profile" element={<Profile />}></Route>
+            </Route>
+            <Route exact path='/chat' element={<PrivateRoute/>}>
+              <Route exact path="/chat" element={<Chat />}></Route>
             </Route>
             <Route exact path='/addroom' element={<PrivateRoute/>}>
               <Route exact path="/addroom" element={<Addroom />}></Route>

@@ -1,12 +1,12 @@
 import { useEffect, useContext, useState, useRef } from "react";
 import socketIOClient from "socket.io-client";
-import Conversations from "../../components/Conversations/Conversations";
+import Conversations from "../../component/Conversations/Conversations";
 import { AuthContext } from "../../Context/AuthContext";
-import Messages from "../../components/Messages/Messages";
+import Messages from "../../component/Messages/Messages";
 import "./Chat.css";
-import Navbar2 from "../../components/Navbar/Navbar2";
-import SearchUsers from "../../components/Search/Users";
-import Person1 from "../../component/Images/Person1.jpg";
+import Navbar2 from "../../component/Topbar/Topbar";
+import SearchUsers from "../../component/Search/Users";
+import Person1 from "../../component/Images/person1.jpg";
 
 export default function Chat() {
   const { AuthUser } = useContext(AuthContext);
