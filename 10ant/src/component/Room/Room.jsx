@@ -71,8 +71,8 @@ export default function Room() {
     setFilteredData(rooms); // Reset to the original data
   };
 
-  const handleCardClick = (item) => {
-    navigate("/one");
+  const handleCardClick = (r) => {
+    console.log(r)
   };
 
   return (
@@ -139,7 +139,7 @@ export default function Room() {
       <div className="roomWrapper">
         <div className="roomCards">
           {filteredData.map((r, index) => (
-            <Roomcard key={r.id} {...r} onClick={() => handleCardClick(r)} />
+            <Roomcard key={r.id} {...r} onClick={()=>handleCardClick(r)} />
           ))}
         </div>
       </div>

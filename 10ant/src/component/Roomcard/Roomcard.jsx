@@ -6,12 +6,18 @@ import { useNavigate } from "react-router-dom";
 export default function Roomcard(props) {
   const navigate=useNavigate()
 
-  const handleCardClick=()=>
+  const handleCardClick=(r)=>
   {
-    navigate('/one')
+    navigate(`/one`);
+    console.log(r)
+  }
+
+  const chatbtn=()=>
+  {
+    navigate('/chat');
   }
   return (
-    <div className="roomcard" onClick={handleCardClick}>
+    <div className="roomcard" onClick={()=>handleCardClick(props)}>
       <div className="roomcardWrapper">
         <div className="roomDetails">
           <div className="allroomDetails">
@@ -36,7 +42,7 @@ export default function Roomcard(props) {
             <div className="roomOwner">
               <span>Owner: {props.title}</span>
             </div>
-            <button className="chatbtn">Chat with owner</button>
+            <button className="chatbtn" onClick={chatbtn}>Chat with owner</button>
           </div>
         </div>
       </div>
