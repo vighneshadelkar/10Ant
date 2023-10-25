@@ -1,54 +1,146 @@
 import React, { useEffect, useState } from "react";
 import "./Room.css";
-import Roomdata from "../Data/Data";
 import Roomcard from "../Roomcard/Roomcard";
-import axios from 'axios';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Room() {
   const [rooms, setRooms] = useState([]);
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [locationFilter, setLocationFilter] = useState("");
+  const [priceRange, setPriceRange] = useState({ min: "0", max: "2000" }); 
+  const [bhkFilter, setBhkFilter] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
-  const handleCardClick = (item) => {
-    console.log(item)
-    setSelectedItem(item);
+  const locationOptions = [...new Set(rooms.map((room) => room.address))];
+  const bhkOptions = [...new Set(rooms.map((room) => room.bhk.toString()))];
+
+  const navigate = useNavigate();
+
+  const fetchRooms = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/api/room/");
+      if (response && response.data) {
+        setRooms(response.data);
+        setFilteredData(response.data); // Initialize filteredData with all rooms
+      }
+    } catch (error) {
+      console.error("Error fetching rooms:", error);
+    }
   };
 
   useEffect(() => {
-    const fetchRooms = async () => {
-      try {
-        const response = await axios.get("http://localhost:8000/api/room/");
-        if (response && response.data) {
-          setRooms(response.data);
-        }
-      } catch (error) {
-        console.error('Error fetching rooms:', error);
-      } 
-    }
-
     fetchRooms();
   }, []);
 
+  const filterData = () => {
+    const filtered = rooms.filter((room) => {
+      const titleMatch =
+        room.title &&
+        room.title.toLowerCase().includes(searchQuery.toLowerCase());
+
+      const locationMatch =
+        !locationFilter ||
+        (room.address &&
+          room.address.toLowerCase().includes(locationFilter.toLowerCase())); // Changed the condition here
+
+      const minPrice = parseFloat(priceRange.min);
+      const maxPrice = parseFloat(priceRange.max);
+      const priceMatch =
+        (!priceRange.min || (room.price && room.price >= minPrice)) &&
+        (!priceRange.max || (room.price && room.price <= maxPrice)); // Changed the condition here
+
+      const bhkMatch =
+        !bhkFilter || (room.bhk && room.bhk.toString() === bhkFilter);
+
+      return titleMatch && locationMatch && priceMatch && bhkMatch;
+    });
+
+    setFilteredData(filtered);
+  };
+
+  useEffect(() => {
+    filterData();
+  }, [searchQuery, locationFilter, priceRange, bhkFilter]);
+
+  const clearFilters = () => {
+    setSearchQuery("");
+    setLocationFilter("");
+    setPriceRange({ min: "", max: "" });
+    setBhkFilter("");
+    setFilteredData(rooms); // Reset to the original data
+  };
+
+  const handleCardClick = (item) => {
+    navigate("/one");
+  };
+
   return (
     <div className="room">
-      <div className="roomWrapper">
-        {/* <Sidebar/> */}
-        <div className="roomCards">
-          {rooms?.map((r,index) => {
-            return <Roomcard key={r.id} {...r}/>;
-          })}
+      <div className="searchBar">
+        <input
+          type="text"
+          placeholder="Search"
+          className="searchInput"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <div>
+          <select
+            className="minimal"
+            value={locationFilter}
+            onChange={(e) => setLocationFilter(e.target.value)}
+          >
+            <option value="">Location</option>
+            {locationOptions.map((location, index) => (
+              <option key={index} value={location}>
+                {location}
+              </option>
+            ))}
+          </select>
+          <select
+            className="minimal"
+            value={bhkFilter}
+            onChange={(e) => setBhkFilter(e.target.value)}
+          >
+            <option value="">BHK</option>
+            {bhkOptions.map((bhk, index) => (
+              <option key={index} value={bhk}>
+                {`${bhk} BHK`}
+              </option>
+            ))}
+          </select>
+          <span className="priceRange">
+            Price Range:
+            <input
+              className="minimal"
+              type="number"
+              placeholder="Min Price"
+              value={priceRange.min}
+              onChange={(e) =>
+                setPriceRange({ ...priceRange, min: e.target.value })
+              }
+            />
+            <input
+              className="minimal"
+              type="number"
+              placeholder="Max Price"
+              value={priceRange.max}
+              onChange={(e) =>
+                setPriceRange({ ...priceRange, max: e.target.value })
+              }
+            />
+          </span>
         </div>
-        <hr className="divider"></hr>
-        <div className="maps">
-          <iframe
-            title="This is a unique title"
-            src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d168134.03925894178!2d72.82531174544626!3d19.1378018543937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1spaying%20guest%20rooms%20mumbai%20maps!5e0!3m2!1sen!2sin!4v1692804885420!5m2!1sen!2sin"
-            width="400"
-            height="650"
-            // style={border-radiu:20px;}
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
+        <button id="nofilter" onClick={clearFilters}>
+          Clear Filters
+        </button>
+      </div>
+      <div className="roomWrapper">
+        <div className="roomCards">
+          {filteredData.map((r, index) => (
+            <Roomcard key={r.id} {...r} onClick={() => handleCardClick(r)} />
+          ))}
         </div>
       </div>
     </div>

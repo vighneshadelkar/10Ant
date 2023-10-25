@@ -1,10 +1,17 @@
 import React from "react";
 import "./Roomcard.css";
-import Room from "../Images/room.jpg"
+import Room from "../Images/room.jpg";
+import { useNavigate } from "react-router-dom";
 
-export default function Roomcard(props,handleClick) {
+export default function Roomcard(props) {
+  const navigate=useNavigate()
+
+  const handleCardClick=()=>
+  {
+    navigate('/one')
+  }
   return (
-    <div className="roomcard" onClick={handleClick}>
+    <div className="roomcard" onClick={handleCardClick}>
       <div className="roomcardWrapper">
         <div className="roomDetails">
           <div className="allroomDetails">
@@ -20,14 +27,14 @@ export default function Roomcard(props,handleClick) {
               <label htmlFor="roomates">Roomates Needed: </label>
               <span className="roomates">{props.tenants}</span>
             </div>
-            <span className="roomConfiguration">{props.bhk}</span>
+            <span className="roomConfiguration">Bhk: {props.bhk}</span>
             <hr></hr>
             <span className="roomDescription" min={100}>
-              {props.description}
+              Description: {props.description}
             </span>
             <hr></hr>
             <div className="roomOwner">
-              <span>{props.owner_name}</span>
+              <span>Owner: {props.title}</span>
             </div>
             <button className="chatbtn">Chat with owner</button>
           </div>
