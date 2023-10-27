@@ -22,18 +22,18 @@
     box-sizing: border-box;
   }
   
-  h2 {
+  .editProfile h2 {
     font-size: 24px;
     margin-bottom: 20px;
   }
   
-  label {
+  .editProfile label {
     font-weight: 600;
     font-size: 16px;
   }
   
-  input[type="text"],
-  input[type="email"] {
+  .editProfile input[type="text"],
+  .editProfile input[type="email"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -42,12 +42,12 @@
     font-size: 16px;
   }
   
-  input[type="file"] {
+  .editProfile input[type="file"] {
     /* width: 100%; */
     margin-top: 5px;
   }
   
-  button.update {
+  .editProfile button.update {
     background-color: #007bff;
     color: white;
     padding: 10px 20px;

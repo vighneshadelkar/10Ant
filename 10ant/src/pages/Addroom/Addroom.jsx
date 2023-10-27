@@ -2,162 +2,184 @@ import React, { useState, useContext } from "react";
 import "./Addroom.css";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
+import TitBhkOpt from "../../component/Addroom/TitBhkOpt";
+import GendRmsType from "../../component/Addroom/GendRmsType";
+import AddAmen from "../../component/Addroom/AddAmen";
+import PriceImg from "../../component/Addroom/PriceImg";
+import { Form } from "react-router-dom";
 
 export default function Addroom() {
   let {user} = useContext(AuthContext);
 
+  // curr form state
+  const [page,setPage]=useState(0);
+
+  const FormTitles=["Add New Room","Room Details","Enter Address","Pricing"]
+
   const [roomData, setroomData] = useState({
     title: "",
-    price: 0,
-    bhk: null,
+    bhk: "",
+    roomOptions:"",
+    gender:"",
+    houseType:"",
+    roomsNo: "",
+    address:"",
+    city:"",
+    state:"",
+    zip:0,
+    amenities:"",
     description: "",
     tenants: 1,
-    sqft:null,
-    address:"",
+    sqft:0,
+    deposit:0,
+    rent:0,
+    images:[]
   });
+
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [genderSelected, setGenderSelected] = useState(null);
+  const [BhkSelected, setBhkSelected] = useState("1 Bhk");
+  const [houseTypeSelected, sethouseTypeSelected] = useState("Flat");
 
   function handleInput(event) {
     const { name, value } = event.target;
-
-    setroomData((prev) => {
-      return {
-        ...prev,
+    
+    if (name === 'roomOptions') {
+      setSelectedOption(value);
+      setroomData((prevData) => ({
+        ...prevData,
         [name]: value,
-      };
-    });
-    //console.log(roomData);
+      }));
+    } else if (name === 'gender') {
+      setGenderSelected(value);
+      setroomData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    } else if (name === 'bhk') {
+      setBhkSelected(value); 
+      setroomData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+    else if (name === 'houseType') {
+      sethouseTypeSelected(value); 
+      setroomData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    } else {
+      setroomData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+    console.log(roomData);
   }
+  
+
+  const PageDisplay=()=>{
+    if (page===0) {
+      return <TitBhkOpt roomData={roomData} setroomData={setroomData} handleInput={handleInput} selectedOption={selectedOption} setSelectedOption={setSelectedOption}/>;
+    }
+    else if (page===1) {
+      return <GendRmsType roomData={roomData} setroomData={setroomData} handleInput={handleInput} genderSelected={genderSelected}  setGenderSelected={setGenderSelected} BhkSelected={BhkSelected}  setBhkSelected={setBhkSelected}/>;
+    }
+    else if (page===2) {
+      return <AddAmen roomData={roomData} setroomData={setroomData} handleInput={handleInput}/>
+    }
+    else{
+      return <PriceImg roomData={roomData} setroomData={setroomData} handleInput={handleInput} houseTypeSelected={houseTypeSelected} sethouseTypeSelected={sethouseTypeSelected}/>
+    }
+  }
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     console.log(roomData);
     console.log(user.user_id);
-    const res = await axios.postForm("http://localhost:8000/api/room/", {
-      owner_pkey: user.user_id,
-      title: roomData.title,
-      address: roomData.address,
-      price: parseInt(roomData.price),
-      bhk: 2,
-      description: roomData.description,
-      tenants: parseInt(roomData.tenants),
-      sqft: parseInt(roomData.sqft),
-    });
+    
+    const res = await axios.post("http://localhost:8000/api/room/", {
+    owner_pkey: user.user_id,
+    title: roomData.title,
+    bhk: roomData.bhk,
+    roomOptions: roomData.roomOptions,
+    gender: roomData.gender,
+    houseType: roomData.houseType,
+    roomsNo: roomData.roomsNo,
+    address: roomData.address,
+    city: roomData.city,
+    state: roomData.state,
+    zip: roomData.zip,
+    amenities: roomData.amenities,
+    description: roomData.description,
+    tenants: roomData.tenants,
+    sqft: roomData.sqft,
+    deposit: roomData.deposit,
+    rent: roomData.rent,
+    images: roomData.images,
+  });
 
     if (!res) {
       alert("something went wrong");
     }
 
     if (res) {
-      const result = await res.json;
+      const result = await res.json();
       console.log(result);
       setroomData({
         title: "",
-        price: null,
         bhk: "",
-        description: "",
-        tenants: null,
-        sqft:"",
+        roomOptions:"",
+        gender:"",
+        houseType:"",
+        roomsNo: "",
         address:"",
+        city:"",
+        state:"",
+        zip:0,
+        amenities:"",
+        description: "",
+        tenants: 1,
+        sqft:0,
+        deposit:0,
+        rent:0,
+        images:[]
       });
     }
   };
 
   return (
     <div className="addroom">
+      <div className="progressbar">
+        <div style={{width:page===0?"25%":page===1?"50%":page===2?"75%":"100%"}}></div>
+      </div>
       <div className="addroomWrapper">
-        <h2>Add your room: </h2>
-        <form onSubmit={handleSubmit}>
-          <div className="title">
-            <label htmlFor="title">Title:</label>
-            <input
-              type="text"
-              name="title"
-              value={roomData.title}
-              onChange={handleInput}
-              placeholder="eg:1BHK in Mahim"
-              required
-            />
+
+        <div className="addroomheader">
+          <h1>{FormTitles[page]}</h1>
+        </div>
+        <div className="addroom-body">
+          {PageDisplay()}
+        </div>
+
+          <div className="addroom-foot">
+          <button className="btn prev-btn" onClick={()=>{
+            setPage((currPg)=> currPg-1);
+          }} disabled={page===0}>Previous</button>
+          {page===FormTitles.length-1?(
+            <button className="btn next-btn" onClick={handleSubmit}>Submit</button>
+          ):(<>
+          <button className="btn next-btn" onClick={()=>{
+            setPage((currPg)=> currPg+1);
+          }} disabled={page===FormTitles.length-1}>Next</button>
+          </>
+          )}
+          
           </div>
-          <hr></hr>
-          <div className="roomtype">
-            <label htmlFor="roomtype">Room type:</label>
-            <select name="bhk" onChange={handleInput}>
-              <option value="1 bhk">1 Bhk</option>
-              <option value="2 bhk">2 Bhk</option>
-              <option value="3 bhk">3 Bhk</option>
-              <option value="4 bhk">4 Bhk</option>
-              <option value="Villa">Villa</option>
-            </select>
-          </div>
-          <div className="cost">
-            <label htmlFor="cost">Cost per month(INR):</label>
-            <input
-              type="number"
-              min={1500}
-              name="price"
-              onChange={handleInput}
-              value={roomData.price}
-              required
-            />
-          </div>
-          {/* <div className="location">
-            <label htmlFor="location">Location:</label>
-            <input
-              type="text"
-              name="location"
-              value={roomData.location}
-              onChange={handleInput}
-              placeholder="egs:Mahim,Mumbai"
-            />
-            
-          </div> */}
-          <div className="roomates">
-            <label htmlFor="roomates">Address:</label>
-            <input
-              type="text"
-              name="address"
-              value={roomData.address}
-              onChange={handleInput}
-              placeholder=""
-              required
-            />
-          </div>
-          <div className="description">
-            <label htmlFor="description">Description:</label>
-            <input
-              type="text"
-              name="description"
-              value={roomData.description}
-              onChange={handleInput}
-              placeholder="Write something about yourself"
-              required
-            />
-          </div>
-          <div className="roomates">
-            <label htmlFor="roomates">No of roomates you need:</label>
-            <input
-              type="text"
-              name="tenants"
-              value={roomData.tenants}
-              onChange={handleInput}
-              placeholder=""
-              required
-            />
-          </div>
-          <div className="roomates">
-            <label htmlFor="roomates">SQFT:</label>
-            <input
-              type="text"
-              name="sqft"
-              value={roomData.sqft}
-              onChange={handleInput}
-              placeholder="sqft"
-              required
-            />
-          </div>
-          <button className="create">Post Your add for free</button>
-        </form>
       </div>
     </div>
   );
