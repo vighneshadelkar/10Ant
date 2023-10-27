@@ -31,7 +31,7 @@ export default function Home() {
           <h2 id="imgheader">Find Rooms Near You</h2>
           <input
             type="text"
-            className="search"
+            id="searchRooms"
             placeholder="Search by locality"
           ></input>
         </div>

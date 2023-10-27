@@ -1,0 +1,62 @@
+.oneroom-cont{
+    margin-top: 100px;
+    background-color: white;
+    /* width: 100%; */
+    height: fit-content;
+    border-radius: 20px;
+    justify-content: center;
+    padding: 10px;
+    margin-left: 110px;
+    align-items: center;
+}
+
+.oneroom-wrap{
+    padding: 20px;
+    width: 90%;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-around;
+    border-radius: 20px;
+    box-shadow: 1px 1px 8px black;
+}
+
+.oneroom-cont img{
+    height: 500px;
+    width: 600px;
+    border: 3px solid rgb(57, 143, 255);
+    border-radius: 20px;
+}
+.room-desc{
+    padding: 40px;
+    font-size: 18px;
+}
+.loc-title, .owner {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 8px 0px;
+}
+
+.owner{
+    color: rgb(74, 74, 236);
+}
+
+.room-desc p{
+    /* padding: 12px; */
+
+}
+
+.amenities .navRight{
+    display: flex;
+    column-gap: 14px;
+    align-items: center;
+}
+
+
+.amenities .navLinks{
+    display: flex;
+    gap:1.5rem;
+}
+
+.amenities .navLinks{
+    font-weight: 300px;
+}

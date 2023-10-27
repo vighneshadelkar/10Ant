@@ -1,0 +1,26 @@
+.conversations{
+    flex: 4;
+    width: 100%;
+}
+
+.conversationsInput{
+    width: 100%;
+    margin: 2px;
+    padding: 10px;
+    border: 0px;
+    border-radius: 10px;
+}
+
+.search{
+    padding: 10px;
+}
+
+.conversationsWrapper{
+    padding: 10px;
+    background-color: aliceblue;
+    border: 0.5px solid gray;
+    border-left: 0px;
+    border-right: 0px;
+    display: flex;
+    flex-direction: column;
+}

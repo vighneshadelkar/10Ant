@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import "./Topbar.css";
 import logo from "../Images/logo.png"
-import { Link } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 
 export default function Topbar() {
@@ -22,11 +22,11 @@ export default function Topbar() {
         </div>
         <div className="navRight">
           <div className="navLinks">
-            <Link to='/'><h4>HOME</h4></Link>
+            <NavLink to='/'><h4>HOME</h4></NavLink>
             <h4>ROOMMATE</h4>
-            <Link to='/rooms'><h4>ROOM</h4></Link>
-            {user ? <Link onClick={logoutUser}><h4>LOGOUT</h4></Link> : <Link to='/login'><h4>LOGIN</h4></Link>}
-            
+            <NavLink to='/rooms'><h4>ROOM</h4></NavLink>
+            {user && ( <NavLink to='/addroom'><h4>ADDROOM</h4></NavLink>)}    
+            {user ? <NavLink onClick={logoutUser}><h4>LOGOUT</h4></NavLink> : <NavLink to='/login'><h4>LOGIN</h4></NavLink>}
           </div>
         </div>
       </div>

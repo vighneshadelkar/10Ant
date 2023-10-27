@@ -11,8 +11,9 @@ import { useState, useEffect } from "react";
 import Loadingpg from "./pages/Loading/Loadingpg";
 import PrivateRoute from "./utils/PrivateRoute";
 import { AuthProvider } from "./Context/AuthContext";
-
-
+import SingleRoom from "./pages/SingleRoom/SingleRoom"
+import EditProfile from "./pages/EditProfile/EditProfile"
+import Chat from "./pages/Chat/Chat";
 
 function App() {
 
@@ -40,11 +41,19 @@ function App() {
             </Route>
             <Route exact path="/login" element={<Login />}></Route>
             <Route exact path="/signup" element={<Signup />}></Route>
+            <Route exact path="/one" element={<SingleRoom/>}></Route>
+            {/* <Route exact path="/oneroom" element={<OneRoom />}></Route> */}
             <Route exact path='/profile' element={<PrivateRoute/>}>
               <Route exact path="/profile" element={<Profile />}></Route>
             </Route>
+            <Route exact path='/chat' element={<PrivateRoute/>}>
+              <Route exact path="/chat" element={<Chat />}></Route>
+            </Route>
             <Route exact path='/addroom' element={<PrivateRoute/>}>
               <Route exact path="/addroom" element={<Addroom />}></Route>
+            </Route>
+            <Route exact path='/editprofile' element={<PrivateRoute/>}>
+              <Route exact path="/editprofile" element={<EditProfile />}></Route>
             </Route>
           </Routes>
         </AuthProvider>
