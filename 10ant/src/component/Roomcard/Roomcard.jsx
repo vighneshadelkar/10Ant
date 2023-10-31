@@ -1,15 +1,17 @@
 import React from "react";
 import "./Roomcard.css";
 import Room from "../Images/room.jpg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 export default function Roomcard(props) {
   const navigate=useNavigate()
 
   const handleCardClick=(r)=>
   {
-    navigate(`/one`);
-    console.log(r)
+    navigate({
+      pathname: '/one',
+      search: `?price=${props.price}&address=${props.address}&tenants=${props.tenants}&bhk=${props.bhk}&description=${props.description}&title=${props.title}&owner_pkey=${props.owner_pkey}`
+    });
   }
 
   const chatbtn=()=>

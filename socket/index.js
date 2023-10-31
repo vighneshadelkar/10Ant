@@ -15,7 +15,7 @@ const io = socketIo(server, {
   }
 });
 
-mongoose.connect('mongodb://localhost:27017/vighnesh-social', {
+mongoose.connect('mongodb://localhost:27017/10ant', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

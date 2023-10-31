@@ -14,6 +14,7 @@ import { AuthProvider } from "./Context/AuthContext";
 import SingleRoom from "./pages/SingleRoom/SingleRoom"
 import EditProfile from "./pages/EditProfile/EditProfile"
 import Chat from "./pages/Chat/Chat";
+import Chat2 from "./pages/Chat/Chat2";
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 3500);
+    }, 500);
   }, []);
 
 
@@ -48,6 +49,9 @@ function App() {
             </Route>
             <Route exact path='/chat' element={<PrivateRoute/>}>
               <Route exact path="/chat" element={<Chat />}></Route>
+            </Route>
+            <Route exact path='/chat/:id' element={<PrivateRoute/>}>
+              <Route exact path="/chat/:id" element={<Chat2 />}></Route>
             </Route>
             <Route exact path='/addroom' element={<PrivateRoute/>}>
               <Route exact path="/addroom" element={<Addroom />}></Route>

@@ -10,22 +10,22 @@ export default function Conversations({
     lastname: "",
   });
 
-  useEffect(() => {
-    const friendId = conversations.members.find((m) => m !== currentUser._id);
-    const getUser = async () => {
-      const res = await fetch("http://localhost:5000/users/" + friendId);
-      const result = await res.json();
+  // useEffect(() => {
+  //   const friendId = conversations.members.find((m) => m !== currentUser._id);
+  //   const getUser = async () => {
+  //     const res = await fetch("http://localhost:5000/users/" + friendId);
+  //     const result = await res.json();
 
-      if (!res) {
-        console.log("error");
-      }
+  //     if (!res) {
+  //       console.log("error");
+  //     }
 
-      if (res) {
-        setUser(result);
-      }
-    };
-    getUser();
-  }, [currentUser, conversations]);
+  //     if (res) {
+  //       setUser(result);
+  //     }
+  //   };
+  //   getUser();
+  // }, [currentUser, conversations]);
 
   return (
     <div className="conversations">

@@ -7,14 +7,11 @@ import "./Chat.css";
 import Navbar2 from "../../component/Topbar/Topbar";
 import SearchUsers from "../../component/Search/Users";
 import Person1 from "../../component/Images/person1.jpg";
-import { useParams } from "react-router-dom";
-import { SignalWifiStatusbarNullOutlined } from "@mui/icons-material";
 
-export default function Chat() {
+export default function Chat2() {
   const { user } = useContext(AuthContext);
   const [messages, setMessages] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
-  const [chatId, setchatId] = useState(SignalWifiStatusbarNullOutlined)
   const [conversations, setConversations] = useState([]);
   const [count, setcount] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
@@ -22,14 +19,6 @@ export default function Chat() {
   const [inputText, setInputText] = useState("");
   const containerRef = useRef();
   const socket = useRef(null);
-
-  const { conversationId } = useParams();
-
-  if(conversationId){
-    setCurrentChat(conversationId)
-  }
-
-  console.log(conversationId)
 
   // scroll in message boxes
   const scrollDiv = (event) => {
@@ -48,7 +37,6 @@ export default function Chat() {
     );
 
     if (existingConvo) {
-      console.log("Conversation already exists");
       return;
     }
     try {
@@ -72,7 +60,6 @@ export default function Chat() {
       );
 
       if (res.ok) {
-        console.log("success");
         setcount((prev) => prev + 1);
       } else {
         console.log("error");
@@ -90,7 +77,10 @@ export default function Chat() {
         redirect: "follow",
       };
 
-      const res = await fetch("http://localhost:9000/users/getusers", requestOptions);
+      const res = await fetch(
+        "http://localhost:8000/api/user/",
+        requestOptions
+      );
 
       if (res.ok) {
         const result = await res.json();
@@ -102,6 +92,7 @@ export default function Chat() {
       console.error("Error:", error);
     }
   }
+
   useEffect(() => {
     getUsers();
   }, []);
@@ -112,14 +103,17 @@ export default function Chat() {
 
   const filteredData = users.filter(
     (item) =>
-      item.owner &&
-      item.owner.toLowerCase().includes(searchTerm.toLowerCase())
+      item.owner && item.owner.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const renderCards = (items) => {
     return filteredData.map((item, index) => (
-      <li key={index} className="userListItem" onClick={() => createConvo(item.user_id)}>
-        {item.firstname + " " + item.lastname}
+      <li
+        key={index}
+        className="userListItem"
+        onClick={() => createConvo(item.user_id)}
+      >
+        {item.username}
       </li>
     ));
   };
@@ -142,21 +136,19 @@ export default function Chat() {
     if (currentChat) {
       async function getExistingMessages() {
         try {
-          console.log(currentChat._id);
           let requestOptions = {
             method: "GET",
             redirect: "follow",
           };
 
           const res = await fetch(
-            `http://localhost:9000/messages/${currentChat._id}`,
+            `http://localhost:9000/messages/${currentChat[0]._id}`,
             requestOptions
           );
 
           if (res.ok) {
             const result = await res.json();
             setMessages(result);
-            console.log(result);
           } else {
             console.error("Error fetching messages:", res.status);
           }
@@ -168,6 +160,22 @@ export default function Chat() {
       getExistingMessages();
     }
   }, [currentChat]);
+
+  useEffect(() => {
+    const fetchConversationById = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:9000/conversation/${user.user_id}`
+        );
+        const data = await res.json();
+        setMessages([]);
+        setCurrentChat(data); // Set the fetched conversation as currentChat
+      } catch (error) {
+        console.error("Error fetching conversation:", error);
+      }
+    };
+    fetchConversationById();
+  }, []);
 
   // get conversations between users
   useEffect(() => {
@@ -194,17 +202,20 @@ export default function Chat() {
       }
     }
     getConversations();
-  }, [user, count]);
+  }, []);
 
   // send message on chat
   const sendMessage = (e) => {
     e.preventDefault();
+    let newMessage;
+    if (inputText !== "") {
+        newMessage = {
+        conversationId: currentChat[0]._id,
+        sender: user.user_id,
+        text: inputText,
+      };
+    }
 
-    const newMessage = {
-      conversationId: currentChat._id,
-      sender: user.user_id,
-      text: inputText,
-    };
     socket.current.emit("sendMessage", newMessage);
 
     setInputText("");
@@ -224,18 +235,18 @@ export default function Chat() {
                 key={c._id}
                 onClick={() => setCurrentChat(c)}
               >
-                <Conversations conversations={c} currentUser={user}/>
+                <Conversations conversations={c} currentUser={user} />
               </div>
             );
           })}
         </div>
 
-        <div className="chatbox">         
+        <div className="chatbox">
           {currentChat ? (
             <>
               <div className="chatTop" ref={containerRef} onWheel={scrollDiv}>
-                {messages.map((m) => {
-                  return <Messages key={m._id} messages={m} user={user}/>;
+                {messages?.map((m) => {
+                  return <Messages key={m._id} messages={m} user={user} />;
                 })}
               </div>
               <div className="chatBottom">
