@@ -61,9 +61,11 @@ export default function Home() {
                     <br></br>
                     Who Are Looking For A Space In Top Cities Of India.
                   </p>
+                  <a href="/addroom">
                   <button type="submit" className="listbutton">
                     List Your Space
                   </button>
+                </a>
                 </div>
                 <div className="house">
                   <img src={House} alt="houseimg" className="houseimg"></img>
