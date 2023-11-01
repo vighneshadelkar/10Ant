@@ -211,7 +211,7 @@ export default function Chat() {
       <Navbar2 />
       <div className="chatWrapper">
         <div className="chatSidebar">
-          <SearchUsers handleSearch={handleSearch} />
+          {/* <SearchUsers handleSearch={handleSearch} /> */}
           {searchTerm && <ul>{renderCards(filteredData)}</ul>}
           {/* {conversations?.map((c) => {
             console.log(c.members[1]);

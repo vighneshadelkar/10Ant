@@ -14,10 +14,12 @@ export default function Chat2() {
   const [messages, setMessages] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [conversations, setConversations] = useState([]);
+  const [convo, setconvo] = useState(null)
   const [count, setcount] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [users, setusers] = useState([]);
   const [inputText, setInputText] = useState("");
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const containerRef = useRef();
   const socket = useRef(null);
 
@@ -111,22 +113,16 @@ export default function Chat2() {
     getUsers();
   }, []);
 
-  const handleSearch = (term) => {
-    setSearchTerm(term);
-  };
+  
 
-  const filteredData = users.filter(
-    (item) =>
-      item.owner && item.owner.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // const filteredData = users.filter(
+  //   (item) =>
+  //     item.owner && item.owner.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
 
   const renderCards = (items) => {
-    return filteredData.map((item, index) => (
-      <li
-        key={index}
-        className="userListItem"
-        onClick={() => createConvo(item.owner_pkey)}
-      >
+    return items.map((item) => (
+      <li key={item.id} className="userListItem">
         {item.username}
       </li>
     ));
@@ -210,7 +206,9 @@ export default function Chat2() {
 
         if (res.ok) {
           const result = await res.json();
+          console.log(result.members)
           setConversations(result);
+          // setconvo(result.members)
         } else {
           console.error("Error fetching conversations:", res.status);
         }
@@ -238,31 +236,45 @@ export default function Chat2() {
     setInputText("");
   };
 
+  // const handleSearch = (term) => {
+  //   if (!convo || !convo.members) {
+  //     console.error('Conversations or members are undefined.');
+  //     return;
+  //   }
+  
+  //   const friendId = convo.members[1];
+  
+  //   if (friendId === undefined) {
+  //     console.error('Friend ID is undefined.');
+  //     return;
+  //   }
+  
+  //   const friend = users.find((user) => user.id == friendId);
+  
+  //   setSearchTerm(friend ? friend.username : '');
+  // };
+
+  const handleSearch = (term) => {
+    setSearchTerm(term);
+  };
+  
+
+  useEffect(() => {
+    const filteredUsers = users.filter((user) =>
+      user.username.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredUsers(filteredUsers);
+  }, [searchTerm]);
+  
+
   return (
     <div className="chatContainer">
       <Navbar2 />
       <div className="chatWrapper">
         <div className="chatSidebar">
-          <SearchUsers handleSearch={handleSearch} />
-          {searchTerm && <ul>{renderCards(filteredData)}</ul>}
-          {/* {conversations?.map((c) => {
-            console.log(c.members[1]);
-            return (
-              <div
-                className="okay"
-                key={c._id}
-                role="button"
-                onClick={() => {
-                  navigate({
-                    pathname: "/chat",
-                    search: `?owner_pkey=${c.members[1]}`,
-                  });
-                }}
-              > */}
-                <Conversations conversations={conversations} currentUser={user} />
-              {/* </div>
-            );
-          })} */}
+          {/* <SearchUsers handleSearch={() => handleSearch(conversations)} /> */}
+          {searchTerm && <ul>{renderCards(searchTerm)}</ul>}
+          <Conversations conversations={conversations} currentUser={user} />
         </div>
 
         <div className="chatbox">

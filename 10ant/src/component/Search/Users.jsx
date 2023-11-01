@@ -5,7 +5,7 @@ const SearchUsers = ({ handleSearch }) => {
     <div className="search">
       <input
         type="Search"
-        placeholder="Search for friends"
+        placeholder="Search for Room Owners"
         onChange={(e) => handleSearch(e.target.value)}
         className="conversationsInput"
       ></input>

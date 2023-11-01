@@ -62,10 +62,11 @@ export default function Profile() {
                 })
               ) : (
                 <div className="noList">
-                <h2 >YOU HAVE NOT LISTED ANY ROOMS</h2>
-                <Link to={'/addroom'}><h4>Click Here to add rooms</h4></Link>
+                  <h2>YOU HAVE NOT LISTED ANY ROOMS</h2>
+                  <Link to={"/addroom"}>
+                    <h4>Click Here to add rooms</h4>
+                  </Link>
                 </div>
-                
               )}
             </div>
           </div>

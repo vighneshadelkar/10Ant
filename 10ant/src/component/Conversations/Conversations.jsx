@@ -54,7 +54,6 @@ export default function Conversations() {
         {friendsWithConversations.map((convo) => {
           const friendId = convo.members.find((m) => m != user.user_id);
           const friend = users.find((user) => user.id == friendId);
-          console.log(friend)
           return (
             <span
               key={convo._id}
