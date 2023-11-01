@@ -22,22 +22,25 @@ export default function SingleRoom() {
 
   const navigate = useNavigate();
 
-  const createConvo = async (receiverId) => {
+  const createConvo = async (owner_pkey) => {
     const existingConvo = conversations.find(
       (convo) =>
-        (convo.senderId === user.user_id && convo.receiverId === receiverId) ||
-        (convo.senderId === receiverId && convo.receiverId === user.user_id)
+        (convo.senderId === user.user_id && convo.receiverId === owner_pkey) ||
+        (convo.senderId === owner_pkey && convo.receiverId === user.user_id)
     );
 
     if (existingConvo) {
       console.log("Conversation already exists");
-      navigate(`/chat/${user.user_id}`);
+      navigate({
+        pathname: '/chat',
+        search: `?owner_pkey=${owner_pkey}`
+      });
       return;
     }
     try {
       const newConversation = {
         senderId: user.user_id.toString(),
-        receiverId: receiverId,
+        receiverId: owner_pkey,
       };
 
       let requestOptions = {
@@ -56,7 +59,10 @@ export default function SingleRoom() {
 
       if (res.ok) {
         setcount((prev) => prev + 1);
-        navigate(`/chat/${user.user_id}`);
+        navigate({
+          pathname: '/chat',
+          search: `?owner_pkey=${owner_pkey}`
+        });
       } else {
         console.log("error");
       }

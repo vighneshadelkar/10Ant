@@ -27,6 +27,17 @@ Convorouter.post("/", async (req, res) => {
     }
 });
 
+Convorouter.get('/:id/:o_id', async (req, res) => {
+    try {
+        const conversation = await Conversations.find({
+            members: { $all: [req.params.id, req.params.o_id] }
+        })
+        return res.status(201).json(conversation);
+    } catch (error) {
+        return res.status(401).json({ message: error });
+    }
+});
+
 Convorouter.get('/:id', async (req, res) => {
     try {
         const conversation = await Conversations.find({

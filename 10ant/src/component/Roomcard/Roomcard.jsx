@@ -24,7 +24,7 @@ export default function Roomcard(props) {
         <div className="roomDetails">
           <div className="allroomDetails">
             <div >
-              <img src={Room} alt="img" className="roomImage"></img>
+              <img src={props.photo_1} alt="img" className="roomImage"></img>
             </div>
             <h4 className="roomPrice">{props.price} per person</h4>
             <div className="roomLocation">

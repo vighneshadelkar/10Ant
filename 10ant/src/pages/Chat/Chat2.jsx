@@ -7,6 +7,7 @@ import "./Chat.css";
 import Navbar2 from "../../component/Topbar/Topbar";
 import SearchUsers from "../../component/Search/Users";
 import Person1 from "../../component/Images/person1.jpg";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Chat2() {
   const { user } = useContext(AuthContext);
@@ -19,6 +20,20 @@ export default function Chat2() {
   const [inputText, setInputText] = useState("");
   const containerRef = useRef();
   const socket = useRef(null);
+
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const owner_pkey = params.get('owner_pkey');
+
+  const [currentOwnerPkey, setCurrentOwnerPkey] = useState(owner_pkey);
+
+
+  useEffect(() => {
+    // Update the current owner_pkey whenever it changes in the URL
+    setCurrentOwnerPkey(owner_pkey);
+  }, [owner_pkey]);
 
   // scroll in message boxes
   const scrollDiv = (event) => {
@@ -111,7 +126,7 @@ export default function Chat2() {
       <li
         key={index}
         className="userListItem"
-        onClick={() => createConvo(item.user_id)}
+        onClick={() => createConvo(item.owner_pkey)}
       >
         {item.username}
       </li>
@@ -165,8 +180,11 @@ export default function Chat2() {
     const fetchConversationById = async () => {
       try {
         const res = await fetch(
-          `http://localhost:9000/conversation/${user.user_id}`
+          `http://localhost:9000/conversation/${user.user_id}/${currentOwnerPkey}`
         );
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
         const data = await res.json();
         setMessages([]);
         setCurrentChat(data); // Set the fetched conversation as currentChat
@@ -175,7 +193,7 @@ export default function Chat2() {
       }
     };
     fetchConversationById();
-  }, []);
+  }, [currentOwnerPkey]);
 
   // get conversations between users
   useEffect(() => {
@@ -229,11 +247,17 @@ export default function Chat2() {
           <SearchUsers handleSearch={handleSearch} />
           {searchTerm && <ul>{renderCards(filteredData)}</ul>}
           {conversations?.map((c) => {
+            console.log(c.members[1])
             return (
               <div
                 className="okay"
                 key={c._id}
-                onClick={() => setCurrentChat(c)}
+                onClick={() => {
+                  navigate({
+                    pathname: '/chat',
+                    search: `?owner_pkey=${c.members[1]}`
+                  });
+                }}
               >
                 <Conversations conversations={c} currentUser={user} />
               </div>
