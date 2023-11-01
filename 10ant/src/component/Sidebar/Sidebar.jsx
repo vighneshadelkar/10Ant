@@ -19,9 +19,6 @@ export default function Sidebar() {
           <li className="sidebarListitem">
             <span className="siderbarListitemText"><Link to={'/chat/all'}>CHATS</Link></span>
           </li>
-          <li className="sidebarListitem">
-            <span className="siderbarListitemText"><Link to={'/chat/all'}>CHATS</Link></span>
-          </li>
         </ul>
       </div>
     </div>

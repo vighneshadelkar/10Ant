@@ -48,3 +48,12 @@
     font-size: larger;
     padding: 10px;
 }
+
+.roomDescription{
+    height: 38px;
+    overflow-y: hidden;
+}
+
+.roomLocation{
+    height: 50px;
+}
