@@ -31,7 +31,7 @@ export default function Home() {
           <h2 id="imgheader">Find Rooms Near You</h2>
           <input
             type="text"
-            className="search"
+            id="searchRooms"
             placeholder="Search by locality"
           ></input>
         </div>
@@ -61,9 +61,11 @@ export default function Home() {
                     <br></br>
                     Who Are Looking For A Space In Top Cities Of India.
                   </p>
+                  <a href="/addroom">
                   <button type="submit" className="listbutton">
                     List Your Space
                   </button>
+                </a>
                 </div>
                 <div className="house">
                   <img src={House} alt="houseimg" className="houseimg"></img>

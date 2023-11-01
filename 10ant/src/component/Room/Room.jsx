@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Room.css";
 import Roomcard from "../Roomcard/Roomcard";
+import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Room() {
+
+  const {user}=useContext(AuthContext)
+
   const [rooms, setRooms] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
-  const [priceRange, setPriceRange] = useState({ min: "0", max: "2000" }); 
+  const [priceRange, setPriceRange] = useState({ min: "0", max: "2000" });
   const [bhkFilter, setBhkFilter] = useState("");
   const [filteredData, setFilteredData] = useState([]);
 
@@ -22,7 +26,7 @@ export default function Room() {
       const response = await axios.get("http://localhost:8000/api/room/");
       if (response && response.data) {
         setRooms(response.data);
-        setFilteredData(response.data); // Initialize filteredData with all rooms
+        setFilteredData(response.data.filter((item) => item.owner_pkey !== user.user_id)); // Initialize filteredData with all rooms
       }
     } catch (error) {
       console.error("Error fetching rooms:", error);
@@ -71,8 +75,8 @@ export default function Room() {
     setFilteredData(rooms); // Reset to the original data
   };
 
-  const handleCardClick = (item) => {
-    navigate("/one");
+  const handleCardClick = (r) => {
+    console.log(r);
   };
 
   return (
@@ -138,9 +142,12 @@ export default function Room() {
       </div>
       <div className="roomWrapper">
         <div className="roomCards">
-          {filteredData.map((r, index) => (
-            <Roomcard key={r.id} {...r} onClick={() => handleCardClick(r)} />
-          ))}
+          {filteredData.map((r, index) => {
+            console.log(r);
+            return (
+              <Roomcard key={r.id} {...r} onClick={() => handleCardClick(r)} />
+            );
+          })}
         </div>
       </div>
     </div>

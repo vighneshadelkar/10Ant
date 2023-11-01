@@ -13,6 +13,8 @@ import PrivateRoute from "./utils/PrivateRoute";
 import { AuthProvider } from "./Context/AuthContext";
 import SingleRoom from "./pages/SingleRoom/SingleRoom"
 import EditProfile from "./pages/EditProfile/EditProfile"
+import Chat from "./pages/Chat/Chat";
+import Chat2 from "./pages/Chat/Chat2";
 
 function App() {
 
@@ -22,7 +24,7 @@ function App() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 3500);
+    }, 500);
   }, []);
 
 
@@ -35,19 +37,25 @@ function App() {
           </header>
           <Routes>
             <Route exact path="/" element={<Home />}></Route>
-            <Route exact path='/rooms' element={<PrivateRoute/>}>
+            <Route exact path='/rooms' element={<PrivateRoute />}>
               <Route exact path="/rooms" element={<Room />}></Route>
             </Route>
             <Route exact path="/login" element={<Login />}></Route>
-            <Route exact path="/one" element={<SingleRoom/>}></Route>
-            {/* <Route exact path="/oneroom" element={<OneRoom />}></Route> */}
-            <Route exact path='/profile' element={<PrivateRoute/>}>
+            <Route exact path="/signup" element={<Signup />}></Route>
+            <Route exact path="/one" element={<SingleRoom />}></Route>
+            <Route exact path='/profile' element={<PrivateRoute />}>
               <Route exact path="/profile" element={<Profile />}></Route>
             </Route>
-            <Route exact path='/addroom' element={<PrivateRoute/>}>
+            <Route exact path='/chat' element={<PrivateRoute />}>
+              <Route exact path="/chat" element={<Chat2 />}></Route>
+            </Route>
+            <Route exact path='/chat/all' element={<PrivateRoute />}>
+              <Route exact path="/chat/all" element={<Chat />}></Route>
+            </Route>
+            <Route exact path='/addroom' element={<PrivateRoute />}>
               <Route exact path="/addroom" element={<Addroom />}></Route>
             </Route>
-            <Route exact path='/editprofile' element={<PrivateRoute/>}>
+            <Route exact path='/editprofile' element={<PrivateRoute />}>
               <Route exact path="/editprofile" element={<EditProfile />}></Route>
             </Route>
           </Routes>
