@@ -17,6 +17,7 @@ export default function SingleRoom() {
   const description = searchParams.get("description");
   const title = searchParams.get("title");
   const owner_pkey = searchParams.get("owner_pkey");
+  const photo = searchParams.get("photo");
   const [count, setcount] = useState(0);
   const [conversations, setConversations] = useState([]);
 
@@ -74,7 +75,7 @@ export default function SingleRoom() {
   return (
     <div className="oneroom-cont">
       <div className="oneroom-wrap">
-        <img src={Room} alt="roompic" className="room-pic" />
+        <img src={photo} alt="roompic" className="room-pic" />
         <div className="room-desc">
           <div className="loc-title">Address: {address}</div>
           <div className="loc-title">Owner : {title} </div>

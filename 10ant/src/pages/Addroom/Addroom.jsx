@@ -7,9 +7,13 @@ import GendRmsType from "../../component/Addroom/GendRmsType";
 import AddAmen from "../../component/Addroom/AddAmen";
 import PriceImg from "../../component/Addroom/PriceImg";
 import { Form } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Addroom() {
   let {user} = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   // curr form state
   const [page,setPage]=useState(0);
@@ -124,7 +128,7 @@ export default function Addroom() {
     }
 
     if (res) {
-      const result = await res.json();
+      const result = await res.json;
       console.log(result);
       setroomData({
         title: "",
@@ -144,6 +148,8 @@ export default function Addroom() {
         images:[]
       });
     }
+
+    navigate("/profile");
   };
 
   return (

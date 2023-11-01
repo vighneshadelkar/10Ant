@@ -10,7 +10,7 @@ export default function Roomcard(props) {
   {
     navigate({
       pathname: '/one',
-      search: `?price=${props.price}&address=${props.address}&tenants=${props.tenants}&bhk=${props.bhk}&description=${props.description}&title=${props.title}&owner_pkey=${props.owner_pkey}`
+      search: `?price=${props.price}&address=${props.address}&tenants=${props.tenants}&bhk=${props.bhk}&description=${props.description}&title=${props.title}&owner_pkey=${props.owner_pkey}&photo=${props.photo}`
     });
   }
 
@@ -24,7 +24,7 @@ export default function Roomcard(props) {
         <div className="roomDetails">
           <div className="allroomDetails">
             <div >
-              <img src={props.photo_1} alt="img" className="roomImage"></img>
+              <img src={props.photo} alt="img" className="roomImage"></img>
             </div>
             <h4 className="roomPrice">{props.price} per person</h4>
             <div className="roomLocation">
