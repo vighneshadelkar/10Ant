@@ -52,26 +52,47 @@ iframe{
     
 }
 
-select,input {
-    margin: 8px;
-    /* styling */
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 26px;
-    display: inline-block;
-    font: inherit;
-    line-height: 1.5em;
-    padding: 0.5em 3.5em 0.5em 1em;
-  
-    /* reset */
-  
-    margin: 0;      
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-  }
+select{
+  margin: 8px;
+  /* styling */
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 26px;
+  display: inline-block;
+  font: inherit;
+  line-height: 1.5em;
+  padding: 0.5em 3.5em 0.5em 1em;
+
+  /* reset */
+
+  margin: 0;      
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+input {
+  margin: 8px;
+  /* styling */
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 26px;
+  display: inline-block;
+  font: inherit;
+  line-height: 1.5em;
+  padding: 6px 12px;
+
+  /* reset */
+
+  margin: 0;      
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
   
   
 select.minimal {

@@ -176,3 +176,36 @@ form div{
     /* width: 60%; */
     padding-right: 25px;
 }
+
+.addroomheader{
+  margin-bottom:16px;
+}
+.desc{
+  font-size: 14px;
+}
+
+.custom-select {
+  position: relative;
+  width: 100%;
+  display: inline-block; 
+}
+
+.custom-select select {
+  
+  appearance: none;
+  background-color: transparent;
+}
+
+.select-arrow {
+  position: absolute;
+  top: 50%;
+  left: 280px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 5px 0;
+  border-color: #333 transparent transparent transparent;
+}
+
+

@@ -58,11 +58,14 @@ function PriceImg({ roomData, setroomData, handleInput, houseTypeSelected, setho
             </div>
             <div className="city-state-child">
                 <h3>House Type:</h3>
+                <div className="custom-select">
                 <select name="houseType" onChange={handleInput} value={houseTypeSelected}>
                     <option value="Flat">Flat</option>
                     <option value="Apartment">Apartment</option>
                     <option value="House">House</option>
                 </select>
+                <div className="select-arrow"></div> 
+                </div>
             </div>
         </div>
 
