@@ -63,6 +63,7 @@ function PriceImg({ roomData, setroomData, handleInput, houseTypeSelected, setho
                     <option value="Flat">Flat</option>
                     <option value="Apartment">Apartment</option>
                     <option value="House">House</option>
+                    <option value="Villa">Villa</option>                    
                 </select>
                 <div className="select-arrow"></div> 
                 </div>

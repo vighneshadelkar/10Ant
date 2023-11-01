@@ -22,12 +22,10 @@ export default function Addroom() {
     roomOptions:"",
     gender:"",
     houseType:"",
-    roomsNo: "",
     address:"",
     city:"",
     state:"",
     zip:0,
-    amenities:"",
     description: "",
     tenants: 1,
     sqft:0,
@@ -37,8 +35,9 @@ export default function Addroom() {
   });
 
   const [selectedOption, setSelectedOption] = useState(null);
+  const [description, setDescription] = useState('A description about the room');
   const [genderSelected, setGenderSelected] = useState(null);
-  const [BhkSelected, setBhkSelected] = useState("1 Bhk");
+  const [BhkSelected, setBhkSelected] = useState("1 BHK");
   const [houseTypeSelected, sethouseTypeSelected] = useState("Flat");
 
   function handleInput(event) {
@@ -102,7 +101,7 @@ export default function Addroom() {
     console.log(roomData);
     console.log(user.user_id);
     
-    const res = await axios.post("http://localhost:8000/api/room/", {
+    const res = await axios.postForm("http://localhost:8000/api/room/", {
     owner_pkey: user.user_id,
     title: roomData.title,
     address: roomData.address,
@@ -114,9 +113,9 @@ export default function Addroom() {
     bhk: roomData.bhk,
     sqft: roomData.sqft,
     tenants: roomData.tenants,
-    roomOptions: roomData.roomOptions,
+    room_option: roomData.roomOptions,
     gender: roomData.gender,
-    houseType: roomData.houseType,
+    room_type: roomData.houseType,
     deposit: roomData.deposit,
   });
 
@@ -133,12 +132,10 @@ export default function Addroom() {
         roomOptions:"",
         gender:"",
         houseType:"",
-        roomsNo: "",
         address:"",
         city:"",
         state:"",
         zip:0,
-        amenities:"",
         description: "",
         tenants: 1,
         sqft:0,
