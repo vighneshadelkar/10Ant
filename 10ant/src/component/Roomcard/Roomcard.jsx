@@ -37,7 +37,7 @@ export default function Roomcard(props) {
             </div>
             <span className="roomConfiguration">Bhk: {props.bhk}</span>
             <hr></hr>
-            <span className="roomDescription" min={100}>
+            <span className="roomDescription" >
               Description: {props.description}
             </span>
             <hr></hr>

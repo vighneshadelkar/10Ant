@@ -8,7 +8,7 @@ export default function Room() {
   const [rooms, setRooms] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
-  const [priceRange, setPriceRange] = useState({ min: "0", max: "2000" }); 
+  const [priceRange, setPriceRange] = useState({ min: "0", max: "2000" });
   const [bhkFilter, setBhkFilter] = useState("");
   const [filteredData, setFilteredData] = useState([]);
 
@@ -72,7 +72,7 @@ export default function Room() {
   };
 
   const handleCardClick = (r) => {
-    console.log(r)
+    console.log(r);
   };
 
   return (
@@ -139,13 +139,11 @@ export default function Room() {
       <div className="roomWrapper">
         <div className="roomCards">
           {filteredData.map((r, index) => {
-              console.log(r);
-            return(
-            
-            <Roomcard key={r.id} {...r} onClick={()=>handleCardClick(r)} />
-
-            )
-            })}
+            console.log(r);
+            return (
+              <Roomcard key={r.id} {...r} onClick={() => handleCardClick(r)} />
+            );
+          })}
         </div>
       </div>
     </div>
