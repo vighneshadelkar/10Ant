@@ -8,6 +8,7 @@ import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import "./Profile.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
   const { user } = useContext(AuthContext);
@@ -52,16 +53,19 @@ export default function Profile() {
             </span>
           </div>
           <div className="profileRightBottom">
-            <h2>YOUR LISTINGS</h2>
+            <h2>YOUR LISTINGS:</h2>
             <hr></hr>
-            <br></br>
             <div className="roomCards">
               {filteredData.length > 0 ? (
                 filteredData.map((r) => {
                   return <Roomcard key={r.id} {...r} />;
                 })
               ) : (
-                <h1>No listings</h1>
+                <div className="noList">
+                <h2 >YOU HAVE NOT LISTED ANY ROOMS</h2>
+                <Link to={'/addroom'}><h4>Click Here to add rooms</h4></Link>
+                </div>
+                
               )}
             </div>
           </div>

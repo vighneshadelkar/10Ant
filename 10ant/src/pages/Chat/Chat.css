@@ -17,35 +17,38 @@
 
 .chatTop{
     width: 55vw;
-    height: 80vh;
-    margin-top: 10px;
+    height: 70vh;
+    margin-top: 25px;
     background-color: white;
     padding: 10px;
     overflow: hidden;
     border-radius: 20px;
     margin-left: 10px;
+  box-shadow: 0px 0px 10px black;
 }
 
 .chatbox{
-    height: 87vh;
+    height: 100vh;
     width: 100%;
     flex: 8;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background-image: url('../../images/bg5.jpg'); */
-    background-position: center;
 }
 
 .chatBottom{
-    margin-top: 10px;
+    margin-top: 0px;
+    margin-bottom: 120px;
     gap: 20px;
     display: flex;
     width: 95%;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    background-position: center;
+  padding: 10px;
+
 }
 
 .chatInput{
@@ -79,16 +82,27 @@
     padding-right: 0.9em;
     display: flex;
     align-items: center;
+    justify-content: center;
     border: none;
     border-radius: 16px;
     overflow: hidden;
     transition: all 0.2s;
   }
+
+  .svg-wrapper-1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
   
   .chat-btn span {
     display: block;
-    margin-left: 0.3em;
+    width: max-content;
+    /* margin-left: 0.3em; */
     transition: all 0.3s ease-in-out;
+    font-weight: 400;
+    font-size: 30px;
   }
   
   .chat-btn svg {

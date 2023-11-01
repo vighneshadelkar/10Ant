@@ -228,7 +228,7 @@ export default function Chat() {
 
         <div className="chatbox">         
           {currentChat ? (
-            <>
+            <div className="chatDiv">
               <div className="chatTop" ref={containerRef} onWheel={scrollDiv}>
                 {messages.map((m) => {
                   return <Messages key={m._id} messages={m} user={user}/>;
@@ -244,7 +244,7 @@ export default function Chat() {
                     onChange={(e) => setInputText(e.target.value)}
                   ></input>
                   <button className="chat-btn">
-                    <div className="svg-wrapper-1">
+                    {/* <div className="svg-wrapper-1">
                       <div className="svg-wrapper">
                         <svg
                           height="24"
@@ -259,12 +259,12 @@ export default function Chat() {
                           ></path>
                         </svg>
                       </div>
-                    </div>
+                    </div> */}
                     <span>Send</span>
                   </button>
                 </form>
               </div>
-            </>
+            </div>
           ) : (
             <p className="joinConvo">Join conversation </p>
           )}
