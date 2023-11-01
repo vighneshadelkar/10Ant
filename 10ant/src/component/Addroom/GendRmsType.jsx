@@ -5,7 +5,7 @@ import maleImage from '../Images/male.jpg';
 import anyImage from '../Images/any.jpg';
 
 
-function GendRmsType({ roomData, setroomData, handleInput , genderSelected, setGenderSelected}) {
+function GendRmsType({ roomData, setroomData, handleInput , genderSelected, setGenderSelected, description, setDescription}) {
 
     const gender = [
         { id: 'Female', imageUrl: femaleImage },
@@ -15,12 +15,19 @@ function GendRmsType({ roomData, setroomData, handleInput , genderSelected, setG
 
     return (
         <div className="addroom-comp">
-            <div className="roomtype">
-                {/* <label htmlFor="roomtype">Room type:</label> */}
-                <h3>Description</h3>
-                <textarea name="desc" id="desc" cols="44" rows="4" onChange={handleInput} value={roomData.desc}></textarea>
-                
+            <div className='description'>
+                <h3>Description:</h3>
+                <textarea
+                    type="text"
+                    name="description"
+                    value={roomData.description}
+                    onChange={handleInput}
+                    placeholder="A description about the room"
+                    required
+                    className='address-inp'
+                />
             </div>
+
             <div className="roomOptions">
 
                 <h3>Room Options:</h3>

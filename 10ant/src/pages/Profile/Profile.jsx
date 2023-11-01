@@ -65,7 +65,7 @@ export default function Profile() {
             <img src={userDetails.profile_pic} alt="profile" className="profilePic"></img>
             <span className="profileInfo">
               <h2 className="username">{user.username}</h2>
-              <span className="userInfo">Hello everyone!!</span>
+              <span className="userInfo">{userDetails.bio}</span>
             </span>
           </div>
           <div className="profileRightBottom">

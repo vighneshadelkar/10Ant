@@ -2,10 +2,14 @@ import React, { useState, useContext } from "react";
 import "./EditProfile.css";
 import axios from "axios";
 import { AuthContext } from "../../Context/AuthContext";
-import Img1 from "./5568530_2879736.jpg"
+import Img1 from "./5568530_2879736.jpg";
+import { useNavigate } from "react-router-dom";
+
 
 export default function EditProfile() {
     let { user } = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     const [profileData, setProfileData] = useState({
         name: user.name || "",
@@ -56,6 +60,8 @@ export default function EditProfile() {
             const result = await res.json;
             console.log(result);
         }
+
+        navigate("/profile");
     };
 
     return (
@@ -83,7 +89,7 @@ export default function EditProfile() {
                             required
                         />
                     </div>
-                    
+
                     <div className="contact">
                         <label htmlFor="contact">Contact:</label>
                         <input
