@@ -1,20 +1,19 @@
-import React, { useState,  createContext } from "react";
+import React, { useState,  createContext, useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 import Person1 from "../Images/person1.jpg";
 import "./Messages.css";
 
-export default function Messages({ messages,User}) {
-  const { AuthUser } = createContext(AuthContext);
-  const [incomingMessages, setIncomingMessages] = useState([messages]);
-  console.log(AuthUser)
+export default function Messages( {messages,User}) {
+  const { user: { user_id } } = useContext(AuthContext);
+  const [incomingMessages, setIncomingMessages] = useState([messages]); 
 
   return (
     <>
-      {incomingMessages.map((m) => {
+      {incomingMessages?.map((m) => {
         return (
           <div
             className={
-              m.sender === "64831071112ee317ba2849e6"
+              m.sender == user_id
                 ? "messages-own"
                 : "messages"
             }
@@ -22,12 +21,12 @@ export default function Messages({ messages,User}) {
           >
             <div className="messageContainer">
               <div className="messagesWrapper">
-                <div className={m.sender === "64831071112ee317ba2849e6"
+                <div className={m.sender == user_id
                         ? "chat-own"
                         : "chat"}>
                   <p
                     className={
-                      m.sender === "64831071112ee317ba2849e6"
+                      m.sender == user_id
                         ? "message-own"
                         : "message"
                     }
@@ -42,7 +41,7 @@ export default function Messages({ messages,User}) {
               <div className="usernameWrapper">
                 <small
                   className={
-                    m.sender === "64831071112ee317ba2849e6"
+                    m.sender == user_id
                       ? "username-own"
                       : "username"
                   }
