@@ -20,6 +20,10 @@ nav{
     width: 100%;
     max-height: 45px;
 }
+a{
+    text-decoration: none;
+    
+}
 
 .navCenter{
     display: flex;

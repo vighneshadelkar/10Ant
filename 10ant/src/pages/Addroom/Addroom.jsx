@@ -168,7 +168,7 @@ export default function Addroom() {
             setPage((currPg)=> currPg-1);
           }} disabled={page===0}>Previous</button>
           {page===FormTitles.length-1?(
-            <button className="btn next-btn" onClick={handleSubmit}>Submit</button>
+            <button className="btn next-btn" style={{ backgroundColor: 'blue' }} onClick={handleSubmit}>Submit</button>
           ):(<>
           <button className="btn next-btn" onClick={()=>{
             setPage((currPg)=> currPg+1);
