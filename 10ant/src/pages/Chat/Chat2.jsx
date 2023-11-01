@@ -25,10 +25,9 @@ export default function Chat2() {
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const owner_pkey = params.get('owner_pkey');
+  const owner_pkey = params.get("owner_pkey");
 
   const [currentOwnerPkey, setCurrentOwnerPkey] = useState(owner_pkey);
-
 
   useEffect(() => {
     // Update the current owner_pkey whenever it changes in the URL
@@ -227,7 +226,7 @@ export default function Chat2() {
     e.preventDefault();
     let newMessage;
     if (inputText !== "") {
-        newMessage = {
+      newMessage = {
         conversationId: currentChat[0]._id,
         sender: user.user_id,
         text: inputText,
@@ -246,23 +245,24 @@ export default function Chat2() {
         <div className="chatSidebar">
           <SearchUsers handleSearch={handleSearch} />
           {searchTerm && <ul>{renderCards(filteredData)}</ul>}
-          {conversations?.map((c) => {
-            console.log(c.members[1])
+          {/* {conversations?.map((c) => {
+            console.log(c.members[1]);
             return (
               <div
                 className="okay"
                 key={c._id}
+                role="button"
                 onClick={() => {
                   navigate({
-                    pathname: '/chat',
-                    search: `?owner_pkey=${c.members[1]}`
+                    pathname: "/chat",
+                    search: `?owner_pkey=${c.members[1]}`,
                   });
                 }}
-              >
-                <Conversations conversations={c} currentUser={user} />
-              </div>
+              > */}
+                <Conversations conversations={conversations} currentUser={user} />
+              {/* </div>
             );
-          })}
+          })} */}
         </div>
 
         <div className="chatbox">

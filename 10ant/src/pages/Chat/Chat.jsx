@@ -213,25 +213,32 @@ export default function Chat() {
         <div className="chatSidebar">
           <SearchUsers handleSearch={handleSearch} />
           {searchTerm && <ul>{renderCards(filteredData)}</ul>}
-          {conversations?.map((c) => {
+          {/* {conversations?.map((c) => {
+            console.log(c.members[1]);
             return (
               <div
                 className="okay"
                 key={c._id}
-                onClick={() => setCurrentChat(c)}
-              >
-                <Conversations conversations={c} currentUser={user}/>
-              </div>
+                role="button"
+                onClick={() => {
+                  navigate({
+                    pathname: "/chat",
+                    search: `?owner_pkey=${c.members[1]}`,
+                  });
+                }}
+              > */}
+                <Conversations conversations={conversations} currentUser={user} />
+              {/* </div>
             );
-          })}
+          })} */}
         </div>
 
-        <div className="chatbox">         
+        <div className="chatbox">
           {currentChat ? (
             <div className="chatDiv">
               <div className="chatTop" ref={containerRef} onWheel={scrollDiv}>
-                {messages.map((m) => {
-                  return <Messages key={m._id} messages={m} user={user}/>;
+                {messages?.map((m) => {
+                  return <Messages key={m._id} messages={m} user={user} />;
                 })}
               </div>
               <div className="chatBottom">
@@ -273,3 +280,4 @@ export default function Chat() {
     </div>
   );
 }
+
