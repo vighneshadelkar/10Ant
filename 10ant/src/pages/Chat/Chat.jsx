@@ -8,13 +8,11 @@ import Navbar2 from "../../component/Topbar/Topbar";
 import SearchUsers from "../../component/Search/Users";
 import Person1 from "../../component/Images/person1.jpg";
 import { useParams } from "react-router-dom";
-import { SignalWifiStatusbarNullOutlined } from "@mui/icons-material";
 
 export default function Chat() {
   const { user } = useContext(AuthContext);
   const [messages, setMessages] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
-  const [chatId, setchatId] = useState(SignalWifiStatusbarNullOutlined)
   const [conversations, setConversations] = useState([]);
   const [count, setcount] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,8 +26,6 @@ export default function Chat() {
   if(conversationId){
     setCurrentChat(conversationId)
   }
-
-  console.log(conversationId)
 
   // scroll in message boxes
   const scrollDiv = (event) => {
