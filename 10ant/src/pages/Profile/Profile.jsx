@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import Sidebar from "../../component/Sidebar/Sidebar";
 import coverImg from "../../component/Images/coverimg.jpg";
 import profilePic from "../../component/Images/profilepic.jpg";
 import Roomdata from "../../component/Data/Data";
 import Roomcard from "../../component/Roomcard/Roomcard";
+import { AuthContext } from "../../Context/AuthContext";
 import "./Profile.css";
 
 export default function Profile() {
+
+  const {user}=useContext(AuthContext)
   return (
     <>
       <div className="profile">
@@ -16,7 +19,7 @@ export default function Profile() {
             <img src={coverImg} alt="coverimg" className="profileCoverImg" />
             <img src={profilePic} alt="profile" className="profilePic"></img>
             <span className="profileInfo">
-              <h2 className="username">Vighnesh Adelkar</h2>
+              <h2 className="username">{user.username}</h2>
               <span className="userInfo">Hello everyone!!</span>
             </span>
           </div>
