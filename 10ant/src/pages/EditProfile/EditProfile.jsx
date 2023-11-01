@@ -11,6 +11,7 @@ export default function EditProfile() {
         name: user.name || "",
         contact: user.contact || "",
         email: user.email || "",
+        bio: user.bio || "",
         profilePic: user.profilePic || "",
     });
 
@@ -38,15 +39,14 @@ export default function EditProfile() {
 
 
         const formData = new FormData();
-        formData.append("user_id", user.user_id);
-        formData.append("name", profileData.name);
-        formData.append("contact", profileData.contact);
+        formData.append("username", profileData.name);
+        formData.append("phone_no", profileData.contact);
         formData.append("email", profileData.email);
-        formData.append("profilePic", selectedFile);
+        formData.append("bio", profileData.bio);
+        formData.append("profile_pic", selectedFile);
 
         
-        const res = await axios.put(
-            "apicall", formData);
+        const res = await axios.put("http://localhost:8000/api/user/update/"+user.user_id+"/", formData);
 
         if (!res) {
             alert("Something went wrong");
@@ -83,6 +83,7 @@ export default function EditProfile() {
                             required
                         />
                     </div>
+                    
                     <div className="contact">
                         <label htmlFor="contact">Contact:</label>
                         <input
@@ -93,12 +94,24 @@ export default function EditProfile() {
                             required
                         />
                     </div>
+
                     <div className="email">
                         <label htmlFor="email">Email:</label>
                         <input
                             type="email"
                             name="email"
                             value={profileData.email}
+                            onChange={handleInput}
+                            required
+                        />
+                    </div>
+
+                    <div className="bio">
+                        <label htmlFor="bio">Bio:</label>
+                        <input
+                            type="text"
+                            name="bio"
+                            value={profileData.bio}
                             onChange={handleInput}
                             required
                         />
