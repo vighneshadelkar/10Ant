@@ -7,9 +7,13 @@ import GendRmsType from "../../component/Addroom/GendRmsType";
 import AddAmen from "../../component/Addroom/AddAmen";
 import PriceImg from "../../component/Addroom/PriceImg";
 import { Form } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Addroom() {
   let {user} = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   // curr form state
   const [page,setPage]=useState(0);
@@ -22,12 +26,10 @@ export default function Addroom() {
     roomOptions:"",
     gender:"",
     houseType:"",
-    roomsNo: "",
     address:"",
     city:"",
     state:"",
     zip:0,
-    amenities:"",
     description: "",
     tenants: 1,
     sqft:0,
@@ -37,8 +39,9 @@ export default function Addroom() {
   });
 
   const [selectedOption, setSelectedOption] = useState(null);
+  const [description, setDescription] = useState('A description about the room');
   const [genderSelected, setGenderSelected] = useState(null);
-  const [BhkSelected, setBhkSelected] = useState("1 Bhk");
+  const [BhkSelected, setBhkSelected] = useState("1 BHK");
   const [houseTypeSelected, sethouseTypeSelected] = useState("Flat");
 
   function handleInput(event) {
@@ -102,25 +105,22 @@ export default function Addroom() {
     console.log(roomData);
     console.log(user.user_id);
     
-    const res = await axios.post("http://localhost:8000/api/room/", {
+    const res = await axios.postForm("http://localhost:8000/api/room/", {
     owner_pkey: user.user_id,
     title: roomData.title,
-    bhk: roomData.bhk,
-    roomOptions: roomData.roomOptions,
-    gender: roomData.gender,
-    houseType: roomData.houseType,
-    roomsNo: roomData.roomsNo,
     address: roomData.address,
     city: roomData.city,
     state: roomData.state,
-    zip: roomData.zip,
-    amenities: roomData.amenities,
+    zipcode: roomData.zip,
     description: roomData.description,
-    tenants: roomData.tenants,
+    price: roomData.rent,
+    bhk: roomData.bhk,
     sqft: roomData.sqft,
+    tenants: roomData.tenants,
+    room_option: roomData.roomOptions,
+    gender: roomData.gender,
+    room_type: roomData.houseType,
     deposit: roomData.deposit,
-    rent: roomData.rent,
-    images: roomData.images,
   });
 
     if (!res) {
@@ -128,7 +128,7 @@ export default function Addroom() {
     }
 
     if (res) {
-      const result = await res.json();
+      const result = await res.json;
       console.log(result);
       setroomData({
         title: "",
@@ -136,12 +136,10 @@ export default function Addroom() {
         roomOptions:"",
         gender:"",
         houseType:"",
-        roomsNo: "",
         address:"",
         city:"",
         state:"",
         zip:0,
-        amenities:"",
         description: "",
         tenants: 1,
         sqft:0,
@@ -150,6 +148,8 @@ export default function Addroom() {
         images:[]
       });
     }
+
+    navigate("/profile");
   };
 
   return (

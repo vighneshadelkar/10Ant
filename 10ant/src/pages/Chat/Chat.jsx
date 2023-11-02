@@ -211,27 +211,34 @@ export default function Chat() {
       <Navbar2 />
       <div className="chatWrapper">
         <div className="chatSidebar">
-          <SearchUsers handleSearch={handleSearch} />
+          {/* <SearchUsers handleSearch={handleSearch} /> */}
           {searchTerm && <ul>{renderCards(filteredData)}</ul>}
-          {conversations?.map((c) => {
+          {/* {conversations?.map((c) => {
+            console.log(c.members[1]);
             return (
               <div
                 className="okay"
                 key={c._id}
-                onClick={() => setCurrentChat(c)}
-              >
-                <Conversations conversations={c} currentUser={user}/>
-              </div>
+                role="button"
+                onClick={() => {
+                  navigate({
+                    pathname: "/chat",
+                    search: `?owner_pkey=${c.members[1]}`,
+                  });
+                }}
+              > */}
+                <Conversations conversations={conversations} currentUser={user} />
+              {/* </div>
             );
-          })}
+          })} */}
         </div>
 
-        <div className="chatbox">         
+        <div className="chatbox">
           {currentChat ? (
-            <>
+            <div className="chatDiv">
               <div className="chatTop" ref={containerRef} onWheel={scrollDiv}>
-                {messages.map((m) => {
-                  return <Messages key={m._id} messages={m} user={user}/>;
+                {messages?.map((m) => {
+                  return <Messages key={m._id} messages={m} user={user} />;
                 })}
               </div>
               <div className="chatBottom">
@@ -244,7 +251,7 @@ export default function Chat() {
                     onChange={(e) => setInputText(e.target.value)}
                   ></input>
                   <button className="chat-btn">
-                    <div className="svg-wrapper-1">
+                    {/* <div className="svg-wrapper-1">
                       <div className="svg-wrapper">
                         <svg
                           height="24"
@@ -259,12 +266,12 @@ export default function Chat() {
                           ></path>
                         </svg>
                       </div>
-                    </div>
+                    </div> */}
                     <span>Send</span>
                   </button>
                 </form>
               </div>
-            </>
+            </div>
           ) : (
             <p className="joinConvo">Join conversation </p>
           )}
@@ -273,3 +280,4 @@ export default function Chat() {
     </div>
   );
 }
+

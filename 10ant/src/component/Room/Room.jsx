@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Room.css";
 import Roomcard from "../Roomcard/Roomcard";
+import { AuthContext } from "../../Context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Room() {
+
+  const {user}=useContext(AuthContext)
+
   const [rooms, setRooms] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
@@ -22,7 +26,7 @@ export default function Room() {
       const response = await axios.get("http://localhost:8000/api/room/");
       if (response && response.data) {
         setRooms(response.data);
-        setFilteredData(response.data); // Initialize filteredData with all rooms
+        setFilteredData(response.data.filter((item) => item.owner_pkey !== user.user_id)); // Initialize filteredData with all rooms
       }
     } catch (error) {
       console.error("Error fetching rooms:", error);

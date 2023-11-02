@@ -2,7 +2,7 @@
 .messages{
     display: flex;
     flex-direction: row;
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
     margin-bottom: 5px;
 }
 
