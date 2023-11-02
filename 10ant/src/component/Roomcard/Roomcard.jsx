@@ -10,7 +10,7 @@ export default function Roomcard(props) {
   {
     navigate({
       pathname: '/one',
-      search: `?price=${props.price}&address=${props.address}&tenants=${props.tenants}&bhk=${props.bhk}&description=${props.description}&title=${props.title}&owner_pkey=${props.owner_pkey}&photo=${props.photo}`
+      search: `?price=${props.price}&address=${props.address}&city=${props.city}&tenants=${props.tenants}&bhk=${props.bhk}&room_type=${props.room_type}&description=${props.description}&title=${props.title}&owner_pkey=${props.owner_pkey}&photo=${props.photo}&list_date=${props.list_date}`
     });
   }
 
@@ -26,24 +26,19 @@ export default function Roomcard(props) {
             <div >
               <img src={props.photo} alt="img" className="roomImage"></img>
             </div>
-            <h4 className="roomPrice">{props.price} per person</h4>
+            <div className="roomTitle">
+              <h3>{props.title}</h3>
+            </div>
             <div className="roomLocation">
-              <label htmlFor="Location">Location: </label>
-              <span className="Location">{props.address}</span>
-            </div>
-            <div className="roomatesNeeded">
-              <label htmlFor="roomates">Roomates Needed: </label>
-              <span className="roomates">{props.tenants}</span>
-            </div>
-            <span className="roomConfiguration">Bhk: {props.bhk}</span>
+              <strong><span className="Location">{props.city}</span></strong> | <strong><span className="roomates">{props.bhk}</span></strong> | <strong><span className="houseType">{props.room_type} </span></strong>
+            </div> 
             <hr></hr>
             <span className="roomDescription" >
-              Description: {props.description}
+              {props.description}
             </span>
+            <button class="custom-btn btn-13">₹ {props.price}</button>
+            
             <hr></hr>
-            <div className="roomOwner">
-              <span>Owner: {props.title}</span>
-            </div>
             <button className="chatbtn" onClick={chatbtn}>Chat with owner</button>
           </div>
         </div>

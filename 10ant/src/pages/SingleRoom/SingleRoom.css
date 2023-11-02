@@ -1,3 +1,4 @@
+
 .oneroom-cont{
     margin-top: 100px;
     background-color: white;
@@ -40,11 +41,6 @@
     color: rgb(74, 74, 236);
 }
 
-.room-desc p{
-    /* padding: 12px; */
-
-}
-
 .amenities .navRight{
     display: flex;
     column-gap: 14px;
@@ -59,4 +55,9 @@
 
 .amenities .navLinks{
     font-weight: 300px;
+}
+
+.room-pic {
+    margin-top: auto;
+    margin-bottom: auto;
 }
