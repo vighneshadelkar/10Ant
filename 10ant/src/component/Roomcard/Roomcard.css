@@ -50,10 +50,37 @@
 }
 
 .roomDescription{
-    height: 38px;
+    height: 45px;
     overflow-y: hidden;
 }
 
 .roomLocation{
     height: 50px;
 }
+
+.btn-13 {
+    float: right;
+    margin: 5px;
+    background-color: #1ccb2e;
+    background-image: linear-gradient(315deg, rgb(43, 186, 133) 0%, #03c84b 74%);
+    border: none;
+    z-index: 1;
+}
+
+.custom-btn {
+    width: 100px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5), 7px 7px 20px 0px rgba(0,0,0,.1), 4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+}
+
+
