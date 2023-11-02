@@ -40,7 +40,7 @@ export default function Profile() {
         setUserDetails(response.data);
       }
     } catch (error) {
-      console.error("Error fetching rooms:", error);
+      console.error("Error fetching user:", error);
     }
   }
 
