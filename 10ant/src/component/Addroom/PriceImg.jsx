@@ -1,7 +1,10 @@
-import React from 'react'
+import React from 'react';
 import '../../pages/Addroom/Addroom.css';
+import { useDropzone } from 'react-dropzone';
 
-function PriceImg({ roomData, setroomData, handleInput, houseTypeSelected, sethouseTypeSelected }) {
+function PriceImg({ roomData, setroomData, handleInput, handleImage, houseTypeSelected, sethouseTypeSelected }) {
+    const { getRootProps, getInputProps } = useDropzone({ onDrop: handleImage });
+
     return (
         <div className="addroom-comp">
             <div className="city-state">
@@ -14,7 +17,7 @@ function PriceImg({ roomData, setroomData, handleInput, houseTypeSelected, setho
                         onChange={handleInput}
                         placeholder="0"
                         required
-                        className='num-inp'
+                        className="num-inp"
                     />
                 </div>
                 <div className="city-state-child">
@@ -26,7 +29,7 @@ function PriceImg({ roomData, setroomData, handleInput, houseTypeSelected, setho
                         onChange={handleInput}
                         placeholder="0"
                         required
-                        className='num-inp'
+                        className="num-inp"
                     />
                 </div>
             </div>
@@ -40,7 +43,7 @@ function PriceImg({ roomData, setroomData, handleInput, houseTypeSelected, setho
                         onChange={handleInput}
                         placeholder="0"
                         required
-                        className='num-inp'
+                        className="num-inp"
                     />
                 </div>
                 <div className="city-state-child">
@@ -52,25 +55,37 @@ function PriceImg({ roomData, setroomData, handleInput, houseTypeSelected, setho
                         onChange={handleInput}
                         placeholder="0"
                         required
-                        className='num-inp'
+                        className="num-inp"
                     />
                 </div>
             </div>
             <div className="city-state-child">
                 <h3>House Type:</h3>
                 <div className="custom-select">
-                <select name="houseType" onChange={handleInput} value={houseTypeSelected}>
-                    <option value="Flat">Flat</option>
-                    <option value="Apartment">Apartment</option>
-                    <option value="House">House</option>
-                    <option value="Villa">Villa</option>                    
-                </select>
-                <div className="select-arrow"></div> 
+                    <select name="houseType" onChange={handleInput} value={houseTypeSelected}>
+                        <option value="Flat">Flat</option>
+                        <option value="Apartment">Apartment</option>
+                        <option value="House">House</option>
+                        <option value="Villa">Villa</option>
+                    </select>
+                    <div className="select-arrow"></div>
                 </div>
             </div>
-        </div>
+            <div className="city-state-child">
+                <h3>Add Room Images:</h3>
+                <div {...getRootProps()} className="dropzone">
+                    <input {...getInputProps()} />
+                    <p className='drag-drop'>Drag & drop or click to select images</p>
+                </div>
+                <div className="image-preview">
+                    {roomData.images.map((image, index) => (
+                        <img key={index} src={image} alt={`Image ${index}`} />
+                    ))}
+                </div>
 
-    )
+            </div>
+        </div>
+    );
 }
 
 export default PriceImg;

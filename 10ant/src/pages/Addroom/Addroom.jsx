@@ -8,7 +8,7 @@ import AddAmen from "../../component/Addroom/AddAmen";
 import PriceImg from "../../component/Addroom/PriceImg";
 import { Form } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import { Dropzone } from 'react-dropzone';
 
 export default function Addroom() {
   let {user} = useContext(AuthContext);
@@ -43,6 +43,7 @@ export default function Addroom() {
   const [genderSelected, setGenderSelected] = useState(null);
   const [BhkSelected, setBhkSelected] = useState("1 BHK");
   const [houseTypeSelected, sethouseTypeSelected] = useState("Flat");
+
 
   function handleInput(event) {
     const { name, value } = event.target;
@@ -80,6 +81,16 @@ export default function Addroom() {
     }
     console.log(roomData);
   }
+
+  function handleImage(acceptedFiles){
+    
+    const imageUrls = acceptedFiles.map((file) => URL.createObjectURL(file));
+    setroomData((prevData) => ({
+      ...prevData,
+      images: [...prevData.images, ...imageUrls],
+    }));
+  };
+  
   
 
   const PageDisplay=()=>{
@@ -93,7 +104,7 @@ export default function Addroom() {
       return <AddAmen roomData={roomData} setroomData={setroomData} handleInput={handleInput}/>
     }
     else{
-      return <PriceImg roomData={roomData} setroomData={setroomData} handleInput={handleInput} houseTypeSelected={houseTypeSelected} sethouseTypeSelected={sethouseTypeSelected}/>
+      return <PriceImg roomData={roomData} setroomData={setroomData} handleInput={handleInput} handleImage={handleImage} houseTypeSelected={houseTypeSelected} sethouseTypeSelected={sethouseTypeSelected}/>
     }
   }
 

@@ -208,4 +208,17 @@ form div{
   border-color: #333 transparent transparent transparent;
 }
 
-
+.drag-drop{
+  cursor: pointer;
+  background-color: rgb(182, 217, 248);
+  border-color: #333;
+  border: 2px solid;
+  padding: 2px 4px;
+  width: 50%;
+}
+.image-preview img{
+  width: 100px;
+  height: 75px;
+  margin: 2px 4px;
+  border: 1px solid black;
+}
